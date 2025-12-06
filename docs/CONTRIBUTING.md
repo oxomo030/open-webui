@@ -48,9 +48,10 @@ We welcome pull requests. Before submitting one, please:
 
 1. Open a discussion regarding your ideas [here](https://github.com/open-webui/open-webui/discussions/new/choose).
 2. Follow the project's coding standards and include tests for new features.
-3. Update documentation as necessary.
-4. Write clear, descriptive commit messages.
-5. It's essential to complete your pull request in a timely manner. We move fast, and having PRs hang around too long is not feasible. If you can't get it done within a reasonable time frame, we may have to close it to keep the project moving forward.
+3. **For UI/frontend contributions**, review the [UI Development Guide](UI_DEVELOPMENT.md) for component and styling standards.
+4. Update documentation as necessary.
+5. Write clear, descriptive commit messages.
+6. It's essential to complete your pull request in a timely manner. We move fast, and having PRs hang around too long is not feasible. If you can't get it done within a reasonable time frame, we may have to close it to keep the project moving forward.
 
 > [!NOTE]
 > The Pull Request Template has various requirements outlined. Go through the PR-checklist one by one and ensure you completed all steps before submitting your PR for review (you can open it as draft otherwise!).
