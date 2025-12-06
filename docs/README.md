@@ -6,6 +6,7 @@ Welcome to the Open WebUI documentation directory.
 
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** - Guide for contributing to Open WebUI
 - **[UI_DEVELOPMENT.md](UI_DEVELOPMENT.md)** - UI development standards and component guidelines
+- **[UI_DEVELOPMENT_EXAMPLES.md](UI_DEVELOPMENT_EXAMPLES.md)** - Practical component examples following UI standards
 - **[SECURITY.md](SECURITY.md)** - Security policies and vulnerability reporting
 - **[apache.md](apache.md)** - Apache web server configuration guide
 

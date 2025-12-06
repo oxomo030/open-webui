@@ -2,6 +2,8 @@
 
 This guide provides comprehensive information about UI development standards, component libraries, and styling approaches used in Open WebUI. Following these guidelines ensures consistency across all applications and components.
 
+> 💡 **Looking for code examples?** Check out [UI_DEVELOPMENT_EXAMPLES.md](UI_DEVELOPMENT_EXAMPLES.md) for practical component examples.
+
 ## Table of Contents
 
 1. [Technology Stack](#technology-stack)
