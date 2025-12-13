@@ -1,0 +1,1656 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Open WebUI - Users API",
+    "description": "API-Spezifikation für users Router",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/v1/users/active": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get Active Users",
+        "description": "Get a list of active users.",
+        "operationId": "get_active_users_api_v1_users_active_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get Users",
+        "operationId": "get_users_api_v1_users__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Query"
+            }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Order By"
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Direction"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": 1,
+              "title": "Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserGroupIdsListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/all": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get All Users",
+        "operationId": "get_all_users_api_v1_users_all_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInfoListResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/search": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Search Users",
+        "operationId": "search_users_api_v1_users_search_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Query"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserIdNameListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/groups": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User Groups",
+        "operationId": "get_user_groups_api_v1_users_groups_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/permissions": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User Permissisions",
+        "operationId": "get_user_permissisions_api_v1_users_permissions_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/default/permissions": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get Default User Permissions",
+        "operationId": "get_default_user_permissions_api_v1_users_default_permissions_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserPermissions"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Update Default User Permissions",
+        "operationId": "update_default_user_permissions_api_v1_users_default_permissions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserPermissions"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/user/settings": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User Settings By Session User",
+        "operationId": "get_user_settings_by_session_user_api_v1_users_user_settings_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/UserSettings"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Get User Settings By Session User Api V1 Users User Settings Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/user/settings/update": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Update User Settings By Session User",
+        "operationId": "update_user_settings_by_session_user_api_v1_users_user_settings_update_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSettings"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserSettings"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/user/info": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User Info By Session User",
+        "operationId": "get_user_info_by_session_user_api_v1_users_user_info_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "additionalProperties": true,
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Get User Info By Session User Api V1 Users User Info Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/user/info/update": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Update User Info By Session User",
+        "operationId": "update_user_info_by_session_user_api_v1_users_user_info_update_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Form Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "additionalProperties": true,
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Update User Info By Session User Api V1 Users User Info Update Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{user_id}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User By Id",
+        "operationId": "get_user_by_id_api_v1_users__user_id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Delete User By Id",
+        "operationId": "delete_user_by_id_api_v1_users__user_id__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean",
+                  "title": "Response Delete User By Id Api V1 Users  User Id  Delete"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{user_id}/oauth/sessions": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User Oauth Sessions By Id",
+        "operationId": "get_user_oauth_sessions_by_id_api_v1_users__user_id__oauth_sessions_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{user_id}/profile/image": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User Profile Image By Id",
+        "operationId": "get_user_profile_image_by_id_api_v1_users__user_id__profile_image_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{user_id}/active": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User Active Status By Id",
+        "operationId": "get_user_active_status_by_id_api_v1_users__user_id__active_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Get User Active Status By Id Api V1 Users  User Id  Active Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{user_id}/update": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Update User By Id",
+        "operationId": "update_user_by_id_api_v1_users__user_id__update_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdateForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/UserModel"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Update User By Id Api V1 Users  User Id  Update Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/{user_id}/groups": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get User Groups By Id",
+        "operationId": "get_user_groups_by_id_api_v1_users__user_id__groups_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ChatPermissions": {
+        "properties": {
+          "controls": {
+            "type": "boolean",
+            "title": "Controls",
+            "default": true
+          },
+          "valves": {
+            "type": "boolean",
+            "title": "Valves",
+            "default": true
+          },
+          "system_prompt": {
+            "type": "boolean",
+            "title": "System Prompt",
+            "default": true
+          },
+          "params": {
+            "type": "boolean",
+            "title": "Params",
+            "default": true
+          },
+          "file_upload": {
+            "type": "boolean",
+            "title": "File Upload",
+            "default": true
+          },
+          "delete": {
+            "type": "boolean",
+            "title": "Delete",
+            "default": true
+          },
+          "delete_message": {
+            "type": "boolean",
+            "title": "Delete Message",
+            "default": true
+          },
+          "continue_response": {
+            "type": "boolean",
+            "title": "Continue Response",
+            "default": true
+          },
+          "regenerate_response": {
+            "type": "boolean",
+            "title": "Regenerate Response",
+            "default": true
+          },
+          "rate_response": {
+            "type": "boolean",
+            "title": "Rate Response",
+            "default": true
+          },
+          "edit": {
+            "type": "boolean",
+            "title": "Edit",
+            "default": true
+          },
+          "share": {
+            "type": "boolean",
+            "title": "Share",
+            "default": true
+          },
+          "export": {
+            "type": "boolean",
+            "title": "Export",
+            "default": true
+          },
+          "stt": {
+            "type": "boolean",
+            "title": "Stt",
+            "default": true
+          },
+          "tts": {
+            "type": "boolean",
+            "title": "Tts",
+            "default": true
+          },
+          "call": {
+            "type": "boolean",
+            "title": "Call",
+            "default": true
+          },
+          "multiple_models": {
+            "type": "boolean",
+            "title": "Multiple Models",
+            "default": true
+          },
+          "temporary": {
+            "type": "boolean",
+            "title": "Temporary",
+            "default": true
+          },
+          "temporary_enforced": {
+            "type": "boolean",
+            "title": "Temporary Enforced",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "ChatPermissions"
+      },
+      "FeaturesPermissions": {
+        "properties": {
+          "api_keys": {
+            "type": "boolean",
+            "title": "Api Keys",
+            "default": false
+          },
+          "direct_tool_servers": {
+            "type": "boolean",
+            "title": "Direct Tool Servers",
+            "default": false
+          },
+          "web_search": {
+            "type": "boolean",
+            "title": "Web Search",
+            "default": true
+          },
+          "image_generation": {
+            "type": "boolean",
+            "title": "Image Generation",
+            "default": true
+          },
+          "code_interpreter": {
+            "type": "boolean",
+            "title": "Code Interpreter",
+            "default": true
+          },
+          "notes": {
+            "type": "boolean",
+            "title": "Notes",
+            "default": true
+          }
+        },
+        "type": "object",
+        "title": "FeaturesPermissions"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "SharingPermissions": {
+        "properties": {
+          "models": {
+            "type": "boolean",
+            "title": "Models",
+            "default": false
+          },
+          "public_models": {
+            "type": "boolean",
+            "title": "Public Models",
+            "default": false
+          },
+          "knowledge": {
+            "type": "boolean",
+            "title": "Knowledge",
+            "default": false
+          },
+          "public_knowledge": {
+            "type": "boolean",
+            "title": "Public Knowledge",
+            "default": false
+          },
+          "prompts": {
+            "type": "boolean",
+            "title": "Prompts",
+            "default": false
+          },
+          "public_prompts": {
+            "type": "boolean",
+            "title": "Public Prompts",
+            "default": false
+          },
+          "tools": {
+            "type": "boolean",
+            "title": "Tools",
+            "default": false
+          },
+          "public_tools": {
+            "type": "boolean",
+            "title": "Public Tools",
+            "default": true
+          },
+          "notes": {
+            "type": "boolean",
+            "title": "Notes",
+            "default": false
+          },
+          "public_notes": {
+            "type": "boolean",
+            "title": "Public Notes",
+            "default": true
+          }
+        },
+        "type": "object",
+        "title": "SharingPermissions"
+      },
+      "UserGroupIdsListResponse": {
+        "properties": {
+          "users": {
+            "items": {
+              "$ref": "#/components/schemas/UserGroupIdsModel"
+            },
+            "type": "array",
+            "title": "Users"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "users",
+          "total"
+        ],
+        "title": "UserGroupIdsListResponse"
+      },
+      "UserGroupIdsModel": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "username": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Username"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role",
+            "default": "pending"
+          },
+          "profile_image_url": {
+            "type": "string",
+            "title": "Profile Image Url"
+          },
+          "bio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bio"
+          },
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gender"
+          },
+          "date_of_birth": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Of Birth"
+          },
+          "info": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Info"
+          },
+          "settings": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserSettings"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "api_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Key"
+          },
+          "oauth_sub": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Sub"
+          },
+          "last_active_at": {
+            "type": "integer",
+            "title": "Last Active At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          },
+          "group_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Group Ids",
+            "default": []
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "email",
+          "profile_image_url",
+          "last_active_at",
+          "updated_at",
+          "created_at"
+        ],
+        "title": "UserGroupIdsModel"
+      },
+      "UserIdNameListResponse": {
+        "properties": {
+          "users": {
+            "items": {
+              "$ref": "#/components/schemas/UserIdNameResponse"
+            },
+            "type": "array",
+            "title": "Users"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "users",
+          "total"
+        ],
+        "title": "UserIdNameListResponse"
+      },
+      "UserIdNameResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "UserIdNameResponse"
+      },
+      "UserInfoListResponse": {
+        "properties": {
+          "users": {
+            "items": {
+              "$ref": "#/components/schemas/UserInfoResponse"
+            },
+            "type": "array",
+            "title": "Users"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "users",
+          "total"
+        ],
+        "title": "UserInfoListResponse"
+      },
+      "UserInfoResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "email",
+          "role"
+        ],
+        "title": "UserInfoResponse"
+      },
+      "UserModel": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "username": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Username"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role",
+            "default": "pending"
+          },
+          "profile_image_url": {
+            "type": "string",
+            "title": "Profile Image Url"
+          },
+          "bio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bio"
+          },
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gender"
+          },
+          "date_of_birth": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Of Birth"
+          },
+          "info": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Info"
+          },
+          "settings": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserSettings"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "api_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Key"
+          },
+          "oauth_sub": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Oauth Sub"
+          },
+          "last_active_at": {
+            "type": "integer",
+            "title": "Last Active At"
+          },
+          "updated_at": {
+            "type": "integer",
+            "title": "Updated At"
+          },
+          "created_at": {
+            "type": "integer",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "email",
+          "profile_image_url",
+          "last_active_at",
+          "updated_at",
+          "created_at"
+        ],
+        "title": "UserModel"
+      },
+      "UserPermissions": {
+        "properties": {
+          "workspace": {
+            "$ref": "#/components/schemas/WorkspacePermissions"
+          },
+          "sharing": {
+            "$ref": "#/components/schemas/SharingPermissions"
+          },
+          "chat": {
+            "$ref": "#/components/schemas/ChatPermissions"
+          },
+          "features": {
+            "$ref": "#/components/schemas/FeaturesPermissions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "workspace",
+          "sharing",
+          "chat",
+          "features"
+        ],
+        "title": "UserPermissions"
+      },
+      "UserResponse": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "profile_image_url": {
+            "type": "string",
+            "title": "Profile Image Url"
+          },
+          "active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "profile_image_url"
+        ],
+        "title": "UserResponse"
+      },
+      "UserSettings": {
+        "properties": {
+          "ui": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ui",
+            "default": {}
+          }
+        },
+        "additionalProperties": true,
+        "type": "object",
+        "title": "UserSettings"
+      },
+      "UserUpdateForm": {
+        "properties": {
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "profile_image_url": {
+            "type": "string",
+            "title": "Profile Image Url"
+          },
+          "password": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "role",
+          "name",
+          "email",
+          "profile_image_url"
+        ],
+        "title": "UserUpdateForm"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "WorkspacePermissions": {
+        "properties": {
+          "models": {
+            "type": "boolean",
+            "title": "Models",
+            "default": false
+          },
+          "knowledge": {
+            "type": "boolean",
+            "title": "Knowledge",
+            "default": false
+          },
+          "prompts": {
+            "type": "boolean",
+            "title": "Prompts",
+            "default": false
+          },
+          "tools": {
+            "type": "boolean",
+            "title": "Tools",
+            "default": false
+          },
+          "models_import": {
+            "type": "boolean",
+            "title": "Models Import",
+            "default": false
+          },
+          "models_export": {
+            "type": "boolean",
+            "title": "Models Export",
+            "default": false
+          },
+          "prompts_import": {
+            "type": "boolean",
+            "title": "Prompts Import",
+            "default": false
+          },
+          "prompts_export": {
+            "type": "boolean",
+            "title": "Prompts Export",
+            "default": false
+          },
+          "tools_import": {
+            "type": "boolean",
+            "title": "Tools Import",
+            "default": false
+          },
+          "tools_export": {
+            "type": "boolean",
+            "title": "Tools Export",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "WorkspacePermissions"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

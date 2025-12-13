@@ -1,0 +1,692 @@
+openapi: 3.1.0
+info:
+  title: Open WebUI - Models API
+  description: API-Spezifikation für models Router
+  version: 1.0.0
+paths:
+  /api/v1/models/list:
+    get:
+      tags:
+      - models
+      summary: Get Models
+      operationId: get_models_api_v1_models_list_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: query
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Query
+      - name: view_option
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: View Option
+      - name: tag
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Tag
+      - name: order_by
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Order By
+      - name: direction
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Direction
+      - name: page
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: 1
+          title: Page
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelListResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/models/base:
+    get:
+      tags:
+      - models
+      summary: Get Base Models
+      operationId: get_base_models_api_v1_models_base_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ModelResponse'
+                type: array
+                title: Response Get Base Models Api V1 Models Base Get
+      security:
+      - HTTPBearer: []
+  /api/v1/models/tags:
+    get:
+      tags:
+      - models
+      summary: Get Model Tags
+      operationId: get_model_tags_api_v1_models_tags_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+                title: Response Get Model Tags Api V1 Models Tags Get
+      security:
+      - HTTPBearer: []
+  /api/v1/models/create:
+    post:
+      tags:
+      - models
+      summary: Create New Model
+      operationId: create_new_model_api_v1_models_create_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ModelModel'
+                - type: 'null'
+                title: Response Create New Model Api V1 Models Create Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/models/export:
+    get:
+      tags:
+      - models
+      summary: Export Models
+      operationId: export_models_api_v1_models_export_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ModelModel'
+                type: array
+                title: Response Export Models Api V1 Models Export Get
+      security:
+      - HTTPBearer: []
+  /api/v1/models/import:
+    post:
+      tags:
+      - models
+      summary: Import Models
+      operationId: import_models_api_v1_models_import_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelsImportForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: boolean
+                title: Response Import Models Api V1 Models Import Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/models/sync:
+    post:
+      tags:
+      - models
+      summary: Sync Models
+      operationId: sync_models_api_v1_models_sync_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyncModelsForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ModelModel'
+                type: array
+                title: Response Sync Models Api V1 Models Sync Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/models/model:
+    get:
+      tags:
+      - models
+      summary: Get Model By Id
+      operationId: get_model_by_id_api_v1_models_model_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ModelResponse'
+                - type: 'null'
+                title: Response Get Model By Id Api V1 Models Model Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/models/model/profile/image:
+    get:
+      tags:
+      - models
+      summary: Get Model Profile Image
+      operationId: get_model_profile_image_api_v1_models_model_profile_image_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/models/model/toggle:
+    post:
+      tags:
+      - models
+      summary: Toggle Model By Id
+      operationId: toggle_model_by_id_api_v1_models_model_toggle_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ModelResponse'
+                - type: 'null'
+                title: Response Toggle Model By Id Api V1 Models Model Toggle Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/models/model/update:
+    post:
+      tags:
+      - models
+      summary: Update Model By Id
+      operationId: update_model_by_id_api_v1_models_model_update_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ModelModel'
+                - type: 'null'
+                title: Response Update Model By Id Api V1 Models Model Update Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/models/model/delete:
+    post:
+      tags:
+      - models
+      summary: Delete Model By Id
+      operationId: delete_model_by_id_api_v1_models_model_delete_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelIdForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: boolean
+                title: Response Delete Model By Id Api V1 Models Model Delete Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/models/delete/all:
+    delete:
+      tags:
+      - models
+      summary: Delete All Models
+      operationId: delete_all_models_api_v1_models_delete_all_delete
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: boolean
+                title: Response Delete All Models Api V1 Models Delete All Delete
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ModelForm:
+      properties:
+        id:
+          type: string
+          title: Id
+        base_model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Base Model Id
+        name:
+          type: string
+          title: Name
+        meta:
+          $ref: '#/components/schemas/ModelMeta'
+        params:
+          $ref: '#/components/schemas/ModelParams'
+        access_control:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Access Control
+        is_active:
+          type: boolean
+          title: Is Active
+          default: true
+      type: object
+      required:
+      - id
+      - name
+      - meta
+      - params
+      title: ModelForm
+    ModelIdForm:
+      properties:
+        id:
+          type: string
+          title: Id
+      type: object
+      required:
+      - id
+      title: ModelIdForm
+    ModelListResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/ModelUserResponse'
+          type: array
+          title: Items
+        total:
+          type: integer
+          title: Total
+      type: object
+      required:
+      - items
+      - total
+      title: ModelListResponse
+    ModelMeta:
+      properties:
+        profile_image_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Profile Image Url
+          default: /static/favicon.png
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        capabilities:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Capabilities
+      additionalProperties: true
+      type: object
+      title: ModelMeta
+    ModelModel:
+      properties:
+        id:
+          type: string
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        base_model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Base Model Id
+        name:
+          type: string
+          title: Name
+        params:
+          $ref: '#/components/schemas/ModelParams'
+        meta:
+          $ref: '#/components/schemas/ModelMeta'
+        access_control:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Access Control
+        is_active:
+          type: boolean
+          title: Is Active
+        updated_at:
+          type: integer
+          title: Updated At
+        created_at:
+          type: integer
+          title: Created At
+      type: object
+      required:
+      - id
+      - user_id
+      - name
+      - params
+      - meta
+      - is_active
+      - updated_at
+      - created_at
+      title: ModelModel
+    ModelParams:
+      properties: {}
+      additionalProperties: true
+      type: object
+      title: ModelParams
+    ModelResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        base_model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Base Model Id
+        name:
+          type: string
+          title: Name
+        params:
+          $ref: '#/components/schemas/ModelParams'
+        meta:
+          $ref: '#/components/schemas/ModelMeta'
+        access_control:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Access Control
+        is_active:
+          type: boolean
+          title: Is Active
+        updated_at:
+          type: integer
+          title: Updated At
+        created_at:
+          type: integer
+          title: Created At
+      type: object
+      required:
+      - id
+      - user_id
+      - name
+      - params
+      - meta
+      - is_active
+      - updated_at
+      - created_at
+      title: ModelResponse
+    ModelUserResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        base_model_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Base Model Id
+        name:
+          type: string
+          title: Name
+        params:
+          $ref: '#/components/schemas/ModelParams'
+        meta:
+          $ref: '#/components/schemas/ModelMeta'
+        access_control:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Access Control
+        is_active:
+          type: boolean
+          title: Is Active
+        updated_at:
+          type: integer
+          title: Updated At
+        created_at:
+          type: integer
+          title: Created At
+        user:
+          anyOf:
+          - $ref: '#/components/schemas/UserResponse'
+          - type: 'null'
+      type: object
+      required:
+      - id
+      - user_id
+      - name
+      - params
+      - meta
+      - is_active
+      - updated_at
+      - created_at
+      title: ModelUserResponse
+    ModelsImportForm:
+      properties:
+        models:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Models
+      type: object
+      required:
+      - models
+      title: ModelsImportForm
+    SyncModelsForm:
+      properties:
+        models:
+          items:
+            $ref: '#/components/schemas/ModelModel'
+          type: array
+          title: Models
+          default: []
+      type: object
+      title: SyncModelsForm
+    UserResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        email:
+          type: string
+          title: Email
+        role:
+          type: string
+          title: Role
+        profile_image_url:
+          type: string
+          title: Profile Image Url
+      type: object
+      required:
+      - id
+      - name
+      - email
+      - role
+      - profile_image_url
+      title: UserResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

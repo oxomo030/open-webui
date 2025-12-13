@@ -1,0 +1,1339 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Open WebUI - Auths API",
+    "description": "API-Spezifikation für auths Router",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/v1/auths/": {
+      "get": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Get Session User",
+        "operationId": "get_session_user_api_v1_auths__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionUserInfoResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auths/update/profile": {
+      "post": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Update Profile",
+        "operationId": "update_profile_api_v1_auths_update_profile_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProfileForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auths/update/password": {
+      "post": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Update Password",
+        "operationId": "update_password_api_v1_auths_update_password_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePasswordForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean",
+                  "title": "Response Update Password Api V1 Auths Update Password Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auths/ldap": {
+      "post": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Ldap Auth",
+        "operationId": "ldap_auth_api_v1_auths_ldap_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LdapForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionUserResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auths/signin": {
+      "post": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Signin",
+        "operationId": "signin_api_v1_auths_signin_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SigninForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionUserResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auths/signup": {
+      "post": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Signup",
+        "operationId": "signup_api_v1_auths_signup_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignupForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionUserResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auths/signout": {
+      "get": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Signout",
+        "operationId": "signout_api_v1_auths_signout_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auths/add": {
+      "post": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Add User",
+        "operationId": "add_user_api_v1_auths_add_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddUserForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SigninResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auths/admin/details": {
+      "get": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Get Admin Details",
+        "operationId": "get_admin_details_api_v1_auths_admin_details_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auths/admin/config": {
+      "get": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Get Admin Config",
+        "operationId": "get_admin_config_api_v1_auths_admin_config_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Update Admin Config",
+        "operationId": "update_admin_config_api_v1_auths_admin_config_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminConfig"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auths/admin/config/ldap/server": {
+      "get": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Get Ldap Server",
+        "operationId": "get_ldap_server_api_v1_auths_admin_config_ldap_server_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LdapServerConfig"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Update Ldap Server",
+        "operationId": "update_ldap_server_api_v1_auths_admin_config_ldap_server_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LdapServerConfig"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auths/admin/config/ldap": {
+      "get": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Get Ldap Config",
+        "operationId": "get_ldap_config_api_v1_auths_admin_config_ldap_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Update Ldap Config",
+        "operationId": "update_ldap_config_api_v1_auths_admin_config_ldap_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LdapConfigForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auths/api_key": {
+      "get": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Get Api Key",
+        "operationId": "get_api_key_api_v1_auths_api_key_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiKey"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Generate Api Key",
+        "operationId": "generate_api_key_api_v1_auths_api_key_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiKey"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "auths"
+        ],
+        "summary": "Delete Api Key",
+        "operationId": "delete_api_key_api_v1_auths_api_key_delete",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean",
+                  "title": "Response Delete Api Key Api V1 Auths Api Key Delete"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddUserForm": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          },
+          "profile_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Image Url",
+            "default": "/user.png"
+          },
+          "role": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Role",
+            "default": "pending"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
+        "title": "AddUserForm"
+      },
+      "AdminConfig": {
+        "properties": {
+          "SHOW_ADMIN_DETAILS": {
+            "type": "boolean",
+            "title": "Show Admin Details"
+          },
+          "WEBUI_URL": {
+            "type": "string",
+            "title": "Webui Url"
+          },
+          "ENABLE_SIGNUP": {
+            "type": "boolean",
+            "title": "Enable Signup"
+          },
+          "ENABLE_API_KEYS": {
+            "type": "boolean",
+            "title": "Enable Api Keys"
+          },
+          "ENABLE_API_KEYS_ENDPOINT_RESTRICTIONS": {
+            "type": "boolean",
+            "title": "Enable Api Keys Endpoint Restrictions"
+          },
+          "API_KEYS_ALLOWED_ENDPOINTS": {
+            "type": "string",
+            "title": "Api Keys Allowed Endpoints"
+          },
+          "DEFAULT_USER_ROLE": {
+            "type": "string",
+            "title": "Default User Role"
+          },
+          "DEFAULT_GROUP_ID": {
+            "type": "string",
+            "title": "Default Group Id"
+          },
+          "JWT_EXPIRES_IN": {
+            "type": "string",
+            "title": "Jwt Expires In"
+          },
+          "ENABLE_COMMUNITY_SHARING": {
+            "type": "boolean",
+            "title": "Enable Community Sharing"
+          },
+          "ENABLE_MESSAGE_RATING": {
+            "type": "boolean",
+            "title": "Enable Message Rating"
+          },
+          "ENABLE_CHANNELS": {
+            "type": "boolean",
+            "title": "Enable Channels"
+          },
+          "ENABLE_NOTES": {
+            "type": "boolean",
+            "title": "Enable Notes"
+          },
+          "ENABLE_USER_WEBHOOKS": {
+            "type": "boolean",
+            "title": "Enable User Webhooks"
+          },
+          "PENDING_USER_OVERLAY_TITLE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pending User Overlay Title"
+          },
+          "PENDING_USER_OVERLAY_CONTENT": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pending User Overlay Content"
+          },
+          "RESPONSE_WATERMARK": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Response Watermark"
+          }
+        },
+        "type": "object",
+        "required": [
+          "SHOW_ADMIN_DETAILS",
+          "WEBUI_URL",
+          "ENABLE_SIGNUP",
+          "ENABLE_API_KEYS",
+          "ENABLE_API_KEYS_ENDPOINT_RESTRICTIONS",
+          "API_KEYS_ALLOWED_ENDPOINTS",
+          "DEFAULT_USER_ROLE",
+          "DEFAULT_GROUP_ID",
+          "JWT_EXPIRES_IN",
+          "ENABLE_COMMUNITY_SHARING",
+          "ENABLE_MESSAGE_RATING",
+          "ENABLE_CHANNELS",
+          "ENABLE_NOTES",
+          "ENABLE_USER_WEBHOOKS"
+        ],
+        "title": "AdminConfig"
+      },
+      "ApiKey": {
+        "properties": {
+          "api_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Api Key"
+          }
+        },
+        "type": "object",
+        "title": "ApiKey"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "LdapConfigForm": {
+        "properties": {
+          "enable_ldap": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Ldap"
+          }
+        },
+        "type": "object",
+        "title": "LdapConfigForm"
+      },
+      "LdapForm": {
+        "properties": {
+          "user": {
+            "type": "string",
+            "title": "User"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user",
+          "password"
+        ],
+        "title": "LdapForm"
+      },
+      "LdapServerConfig": {
+        "properties": {
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "host": {
+            "type": "string",
+            "title": "Host"
+          },
+          "port": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Port"
+          },
+          "attribute_for_mail": {
+            "type": "string",
+            "title": "Attribute For Mail",
+            "default": "mail"
+          },
+          "attribute_for_username": {
+            "type": "string",
+            "title": "Attribute For Username",
+            "default": "uid"
+          },
+          "app_dn": {
+            "type": "string",
+            "title": "App Dn"
+          },
+          "app_dn_password": {
+            "type": "string",
+            "title": "App Dn Password"
+          },
+          "search_base": {
+            "type": "string",
+            "title": "Search Base"
+          },
+          "search_filters": {
+            "type": "string",
+            "title": "Search Filters",
+            "default": ""
+          },
+          "use_tls": {
+            "type": "boolean",
+            "title": "Use Tls",
+            "default": true
+          },
+          "certificate_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Certificate Path"
+          },
+          "validate_cert": {
+            "type": "boolean",
+            "title": "Validate Cert",
+            "default": true
+          },
+          "ciphers": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ciphers",
+            "default": "ALL"
+          }
+        },
+        "type": "object",
+        "required": [
+          "label",
+          "host",
+          "app_dn",
+          "app_dn_password",
+          "search_base"
+        ],
+        "title": "LdapServerConfig"
+      },
+      "SessionUserInfoResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "profile_image_url": {
+            "type": "string",
+            "title": "Profile Image Url"
+          },
+          "token": {
+            "type": "string",
+            "title": "Token"
+          },
+          "token_type": {
+            "type": "string",
+            "title": "Token Type"
+          },
+          "expires_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires At"
+          },
+          "permissions": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Permissions"
+          },
+          "bio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bio"
+          },
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gender"
+          },
+          "date_of_birth": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Of Birth"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "name",
+          "role",
+          "profile_image_url",
+          "token",
+          "token_type"
+        ],
+        "title": "SessionUserInfoResponse"
+      },
+      "SessionUserResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "profile_image_url": {
+            "type": "string",
+            "title": "Profile Image Url"
+          },
+          "token": {
+            "type": "string",
+            "title": "Token"
+          },
+          "token_type": {
+            "type": "string",
+            "title": "Token Type"
+          },
+          "expires_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires At"
+          },
+          "permissions": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Permissions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "name",
+          "role",
+          "profile_image_url",
+          "token",
+          "token_type"
+        ],
+        "title": "SessionUserResponse"
+      },
+      "SigninForm": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "title": "SigninForm"
+      },
+      "SigninResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "profile_image_url": {
+            "type": "string",
+            "title": "Profile Image Url"
+          },
+          "token": {
+            "type": "string",
+            "title": "Token"
+          },
+          "token_type": {
+            "type": "string",
+            "title": "Token Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "name",
+          "role",
+          "profile_image_url",
+          "token",
+          "token_type"
+        ],
+        "title": "SigninResponse"
+      },
+      "SignupForm": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          },
+          "profile_image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Image Url",
+            "default": "/user.png"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
+        "title": "SignupForm"
+      },
+      "UpdatePasswordForm": {
+        "properties": {
+          "password": {
+            "type": "string",
+            "title": "Password"
+          },
+          "new_password": {
+            "type": "string",
+            "title": "New Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "password",
+          "new_password"
+        ],
+        "title": "UpdatePasswordForm"
+      },
+      "UpdateProfileForm": {
+        "properties": {
+          "profile_image_url": {
+            "type": "string",
+            "title": "Profile Image Url"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "bio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bio"
+          },
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gender"
+          },
+          "date_of_birth": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Of Birth"
+          }
+        },
+        "type": "object",
+        "required": [
+          "profile_image_url",
+          "name"
+        ],
+        "title": "UpdateProfileForm"
+      },
+      "UserResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "email": {
+            "type": "string",
+            "title": "Email"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "profile_image_url": {
+            "type": "string",
+            "title": "Profile Image Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "name",
+          "role",
+          "profile_image_url"
+        ],
+        "title": "UserResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

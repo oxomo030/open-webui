@@ -1,0 +1,665 @@
+openapi: 3.1.0
+info:
+  title: Open WebUI - Tools API
+  description: API-Spezifikation für tools Router
+  version: 1.0.0
+paths:
+  /api/v1/tools/:
+    get:
+      tags:
+      - tools
+      summary: Get Tools
+      operationId: get_tools_api_v1_tools__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ToolUserResponse'
+                type: array
+                title: Response Get Tools Api V1 Tools  Get
+      security:
+      - HTTPBearer: []
+  /api/v1/tools/list:
+    get:
+      tags:
+      - tools
+      summary: Get Tool List
+      operationId: get_tool_list_api_v1_tools_list_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ToolUserResponse'
+                type: array
+                title: Response Get Tool List Api V1 Tools List Get
+      security:
+      - HTTPBearer: []
+  /api/v1/tools/load/url:
+    post:
+      tags:
+      - tools
+      summary: Load Tool From Url
+      operationId: load_tool_from_url_api_v1_tools_load_url_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadUrlForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - additionalProperties: true
+                  type: object
+                - type: 'null'
+                title: Response Load Tool From Url Api V1 Tools Load Url Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/tools/export:
+    get:
+      tags:
+      - tools
+      summary: Export Tools
+      operationId: export_tools_api_v1_tools_export_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ToolModel'
+                type: array
+                title: Response Export Tools Api V1 Tools Export Get
+      security:
+      - HTTPBearer: []
+  /api/v1/tools/create:
+    post:
+      tags:
+      - tools
+      summary: Create New Tools
+      operationId: create_new_tools_api_v1_tools_create_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ToolForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ToolResponse'
+                - type: 'null'
+                title: Response Create New Tools Api V1 Tools Create Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/tools/id/{id}:
+    get:
+      tags:
+      - tools
+      summary: Get Tools By Id
+      operationId: get_tools_by_id_api_v1_tools_id__id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ToolModel'
+                - type: 'null'
+                title: Response Get Tools By Id Api V1 Tools Id  Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/tools/id/{id}/update:
+    post:
+      tags:
+      - tools
+      summary: Update Tools By Id
+      operationId: update_tools_by_id_api_v1_tools_id__id__update_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ToolForm'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ToolModel'
+                - type: 'null'
+                title: Response Update Tools By Id Api V1 Tools Id  Id  Update Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/tools/id/{id}/delete:
+    delete:
+      tags:
+      - tools
+      summary: Delete Tools By Id
+      operationId: delete_tools_by_id_api_v1_tools_id__id__delete_delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: boolean
+                title: Response Delete Tools By Id Api V1 Tools Id  Id  Delete Delete
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/tools/id/{id}/valves:
+    get:
+      tags:
+      - tools
+      summary: Get Tools Valves By Id
+      operationId: get_tools_valves_by_id_api_v1_tools_id__id__valves_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  additionalProperties: true
+                - type: 'null'
+                title: Response Get Tools Valves By Id Api V1 Tools Id  Id  Valves
+                  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/tools/id/{id}/valves/spec:
+    get:
+      tags:
+      - tools
+      summary: Get Tools Valves Spec By Id
+      operationId: get_tools_valves_spec_by_id_api_v1_tools_id__id__valves_spec_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  additionalProperties: true
+                - type: 'null'
+                title: Response Get Tools Valves Spec By Id Api V1 Tools Id  Id  Valves
+                  Spec Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/tools/id/{id}/valves/update:
+    post:
+      tags:
+      - tools
+      summary: Update Tools Valves By Id
+      operationId: update_tools_valves_by_id_api_v1_tools_id__id__valves_update_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+              title: Form Data
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  additionalProperties: true
+                - type: 'null'
+                title: Response Update Tools Valves By Id Api V1 Tools Id  Id  Valves
+                  Update Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/tools/id/{id}/valves/user:
+    get:
+      tags:
+      - tools
+      summary: Get Tools User Valves By Id
+      operationId: get_tools_user_valves_by_id_api_v1_tools_id__id__valves_user_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  additionalProperties: true
+                - type: 'null'
+                title: Response Get Tools User Valves By Id Api V1 Tools Id  Id  Valves
+                  User Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/tools/id/{id}/valves/user/spec:
+    get:
+      tags:
+      - tools
+      summary: Get Tools User Valves Spec By Id
+      operationId: get_tools_user_valves_spec_by_id_api_v1_tools_id__id__valves_user_spec_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  additionalProperties: true
+                - type: 'null'
+                title: Response Get Tools User Valves Spec By Id Api V1 Tools Id  Id  Valves
+                  User Spec Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/tools/id/{id}/valves/user/update:
+    post:
+      tags:
+      - tools
+      summary: Update Tools User Valves By Id
+      operationId: update_tools_user_valves_by_id_api_v1_tools_id__id__valves_user_update_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+              title: Form Data
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: object
+                  additionalProperties: true
+                - type: 'null'
+                title: Response Update Tools User Valves By Id Api V1 Tools Id  Id  Valves
+                  User Update Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    LoadUrlForm:
+      properties:
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+      type: object
+      required:
+      - url
+      title: LoadUrlForm
+    ToolForm:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        content:
+          type: string
+          title: Content
+        meta:
+          $ref: '#/components/schemas/ToolMeta'
+        access_control:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Access Control
+      type: object
+      required:
+      - id
+      - name
+      - content
+      - meta
+      title: ToolForm
+    ToolMeta:
+      properties:
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        manifest:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Manifest
+          default: {}
+      type: object
+      title: ToolMeta
+    ToolModel:
+      properties:
+        id:
+          type: string
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        name:
+          type: string
+          title: Name
+        content:
+          type: string
+          title: Content
+        specs:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Specs
+        meta:
+          $ref: '#/components/schemas/ToolMeta'
+        access_control:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Access Control
+        updated_at:
+          type: integer
+          title: Updated At
+        created_at:
+          type: integer
+          title: Created At
+      type: object
+      required:
+      - id
+      - user_id
+      - name
+      - content
+      - specs
+      - meta
+      - updated_at
+      - created_at
+      title: ToolModel
+    ToolResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        name:
+          type: string
+          title: Name
+        meta:
+          $ref: '#/components/schemas/ToolMeta'
+        access_control:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Access Control
+        updated_at:
+          type: integer
+          title: Updated At
+        created_at:
+          type: integer
+          title: Created At
+      type: object
+      required:
+      - id
+      - user_id
+      - name
+      - meta
+      - updated_at
+      - created_at
+      title: ToolResponse
+    ToolUserResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        name:
+          type: string
+          title: Name
+        meta:
+          $ref: '#/components/schemas/ToolMeta'
+        access_control:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Access Control
+        updated_at:
+          type: integer
+          title: Updated At
+        created_at:
+          type: integer
+          title: Created At
+        user:
+          anyOf:
+          - $ref: '#/components/schemas/UserResponse'
+          - type: 'null'
+      additionalProperties: true
+      type: object
+      required:
+      - id
+      - user_id
+      - name
+      - meta
+      - updated_at
+      - created_at
+      title: ToolUserResponse
+    UserResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        email:
+          type: string
+          title: Email
+        role:
+          type: string
+          title: Role
+        profile_image_url:
+          type: string
+          title: Profile Image Url
+      type: object
+      required:
+      - id
+      - name
+      - email
+      - role
+      - profile_image_url
+      title: UserResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

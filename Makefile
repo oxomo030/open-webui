@@ -31,3 +31,8 @@ update:
 	$(DOCKER_COMPOSE) up --build -d
 	$(DOCKER_COMPOSE) start
 
+.PHONY: generate-openapi
+generate-openapi:
+	@echo "Generiere OpenAPI-Spezifikationen..."
+	@cd backend && python scripts/generate_openapi_specs.py
+

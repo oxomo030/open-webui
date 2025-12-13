@@ -1,0 +1,1002 @@
+openapi: 3.1.0
+info:
+  title: Open WebUI - Scim API
+  description: API-Spezifikation für scim Router
+  version: 1.0.0
+paths:
+  /api/v1/scim/v2/ServiceProviderConfig:
+    get:
+      tags:
+      - scim
+      summary: Get Service Provider Config
+      description: Get SCIM Service Provider Configuration
+      operationId: get_service_provider_config_api_v1_scim_v2_ServiceProviderConfig_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/scim/v2/ResourceTypes:
+    get:
+      tags:
+      - scim
+      summary: Get Resource Types
+      description: Get SCIM Resource Types
+      operationId: get_resource_types_api_v1_scim_v2_ResourceTypes_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/scim/v2/Schemas:
+    get:
+      tags:
+      - scim
+      summary: Get Schemas
+      description: Get SCIM Schemas
+      operationId: get_schemas_api_v1_scim_v2_Schemas_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/scim/v2/Users:
+    get:
+      tags:
+      - scim
+      summary: Get Users
+      description: List SCIM Users
+      operationId: get_users_api_v1_scim_v2_Users_get
+      parameters:
+      - name: startIndex
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Startindex
+      - name: count
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 20
+          title: Count
+      - name: filter
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Filter
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SCIMListResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - scim
+      summary: Create User
+      description: Create SCIM User
+      operationId: create_user_api_v1_scim_v2_Users_post
+      parameters:
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SCIMUserCreateRequest'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SCIMUser'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/scim/v2/Users/{user_id}:
+    get:
+      tags:
+      - scim
+      summary: Get User
+      description: Get SCIM User by ID
+      operationId: get_user_api_v1_scim_v2_Users__user_id__get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SCIMUser'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - scim
+      summary: Update User
+      description: Update SCIM User (full update)
+      operationId: update_user_api_v1_scim_v2_Users__user_id__put
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SCIMUserUpdateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SCIMUser'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - scim
+      summary: Patch User
+      description: Update SCIM User (partial update)
+      operationId: patch_user_api_v1_scim_v2_Users__user_id__patch
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SCIMPatchRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SCIMUser'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - scim
+      summary: Delete User
+      description: Delete SCIM User
+      operationId: delete_user_api_v1_scim_v2_Users__user_id__delete
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/scim/v2/Groups:
+    get:
+      tags:
+      - scim
+      summary: Get Groups
+      description: List SCIM Groups
+      operationId: get_groups_api_v1_scim_v2_Groups_get
+      parameters:
+      - name: startIndex
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Startindex
+      - name: count
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 20
+          title: Count
+      - name: filter
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Filter
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SCIMListResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - scim
+      summary: Create Group
+      description: Create SCIM Group
+      operationId: create_group_api_v1_scim_v2_Groups_post
+      parameters:
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SCIMGroupCreateRequest'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SCIMGroup'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/scim/v2/Groups/{group_id}:
+    get:
+      tags:
+      - scim
+      summary: Get Group
+      description: Get SCIM Group by ID
+      operationId: get_group_api_v1_scim_v2_Groups__group_id__get
+      parameters:
+      - name: group_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Group Id
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SCIMGroup'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - scim
+      summary: Update Group
+      description: Update SCIM Group (full update)
+      operationId: update_group_api_v1_scim_v2_Groups__group_id__put
+      parameters:
+      - name: group_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Group Id
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SCIMGroupUpdateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SCIMGroup'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - scim
+      summary: Patch Group
+      description: Update SCIM Group (partial update)
+      operationId: patch_group_api_v1_scim_v2_Groups__group_id__patch
+      parameters:
+      - name: group_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Group Id
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SCIMPatchRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SCIMGroup'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - scim
+      summary: Delete Group
+      description: Delete SCIM Group
+      operationId: delete_group_api_v1_scim_v2_Groups__group_id__delete
+      parameters:
+      - name: group_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Group Id
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SCIMEmail:
+      properties:
+        value:
+          type: string
+          title: Value
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+          default: work
+        primary:
+          type: boolean
+          title: Primary
+          default: true
+        display:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display
+      type: object
+      required:
+      - value
+      title: SCIMEmail
+      description: SCIM Email
+    SCIMGroup:
+      properties:
+        schemas:
+          items:
+            type: string
+          type: array
+          title: Schemas
+          default:
+          - urn:ietf:params:scim:schemas:core:2.0:Group
+        id:
+          type: string
+          title: Id
+        displayName:
+          type: string
+          title: Displayname
+        members:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/SCIMGroupMember'
+            type: array
+          - type: 'null'
+          title: Members
+          default: []
+        meta:
+          $ref: '#/components/schemas/SCIMMeta'
+      type: object
+      required:
+      - id
+      - displayName
+      - meta
+      title: SCIMGroup
+      description: SCIM Group Resource
+    SCIMGroupCreateRequest:
+      properties:
+        schemas:
+          items:
+            type: string
+          type: array
+          title: Schemas
+          default:
+          - urn:ietf:params:scim:schemas:core:2.0:Group
+        displayName:
+          type: string
+          title: Displayname
+        members:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/SCIMGroupMember'
+            type: array
+          - type: 'null'
+          title: Members
+          default: []
+      type: object
+      required:
+      - displayName
+      title: SCIMGroupCreateRequest
+      description: SCIM Group Create Request
+    SCIMGroupMember:
+      properties:
+        value:
+          type: string
+          title: Value
+        $ref:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: $Ref
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+          default: User
+        display:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display
+      type: object
+      required:
+      - value
+      title: SCIMGroupMember
+      description: SCIM Group Member
+    SCIMGroupUpdateRequest:
+      properties:
+        schemas:
+          items:
+            type: string
+          type: array
+          title: Schemas
+          default:
+          - urn:ietf:params:scim:schemas:core:2.0:Group
+        displayName:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Displayname
+        members:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/SCIMGroupMember'
+            type: array
+          - type: 'null'
+          title: Members
+      type: object
+      title: SCIMGroupUpdateRequest
+      description: SCIM Group Update Request
+    SCIMListResponse:
+      properties:
+        schemas:
+          items:
+            type: string
+          type: array
+          title: Schemas
+          default:
+          - urn:ietf:params:scim:api:messages:2.0:ListResponse
+        totalResults:
+          type: integer
+          title: Totalresults
+        itemsPerPage:
+          type: integer
+          title: Itemsperpage
+        startIndex:
+          type: integer
+          title: Startindex
+        Resources:
+          items: {}
+          type: array
+          title: Resources
+      type: object
+      required:
+      - totalResults
+      - itemsPerPage
+      - startIndex
+      - Resources
+      title: SCIMListResponse
+      description: SCIM List Response
+    SCIMMeta:
+      properties:
+        resourceType:
+          type: string
+          title: Resourcetype
+        created:
+          type: string
+          title: Created
+        lastModified:
+          type: string
+          title: Lastmodified
+        location:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Location
+        version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Version
+      type: object
+      required:
+      - resourceType
+      - created
+      - lastModified
+      title: SCIMMeta
+      description: SCIM Resource Metadata
+    SCIMName:
+      properties:
+        formatted:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Formatted
+        familyName:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Familyname
+        givenName:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Givenname
+        middleName:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Middlename
+        honorificPrefix:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Honorificprefix
+        honorificSuffix:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Honorificsuffix
+      type: object
+      title: SCIMName
+      description: SCIM User Name
+    SCIMPatchOperation:
+      properties:
+        op:
+          type: string
+          title: Op
+        path:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Path
+        value:
+          anyOf:
+          - {}
+          - type: 'null'
+          title: Value
+      type: object
+      required:
+      - op
+      title: SCIMPatchOperation
+      description: SCIM Patch Operation
+    SCIMPatchRequest:
+      properties:
+        schemas:
+          items:
+            type: string
+          type: array
+          title: Schemas
+          default:
+          - urn:ietf:params:scim:api:messages:2.0:PatchOp
+        Operations:
+          items:
+            $ref: '#/components/schemas/SCIMPatchOperation'
+          type: array
+          title: Operations
+      type: object
+      required:
+      - Operations
+      title: SCIMPatchRequest
+      description: SCIM Patch Request
+    SCIMPhoto:
+      properties:
+        value:
+          type: string
+          title: Value
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+          default: photo
+        primary:
+          type: boolean
+          title: Primary
+          default: true
+        display:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Display
+      type: object
+      required:
+      - value
+      title: SCIMPhoto
+      description: SCIM Photo
+    SCIMUser:
+      properties:
+        schemas:
+          items:
+            type: string
+          type: array
+          title: Schemas
+          default:
+          - urn:ietf:params:scim:schemas:core:2.0:User
+        id:
+          type: string
+          title: Id
+        externalId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Externalid
+        userName:
+          type: string
+          title: Username
+        name:
+          anyOf:
+          - $ref: '#/components/schemas/SCIMName'
+          - type: 'null'
+        displayName:
+          type: string
+          title: Displayname
+        emails:
+          items:
+            $ref: '#/components/schemas/SCIMEmail'
+          type: array
+          title: Emails
+        active:
+          type: boolean
+          title: Active
+          default: true
+        photos:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/SCIMPhoto'
+            type: array
+          - type: 'null'
+          title: Photos
+        groups:
+          anyOf:
+          - items:
+              additionalProperties:
+                type: string
+              type: object
+            type: array
+          - type: 'null'
+          title: Groups
+        meta:
+          $ref: '#/components/schemas/SCIMMeta'
+      type: object
+      required:
+      - id
+      - userName
+      - displayName
+      - emails
+      - meta
+      title: SCIMUser
+      description: SCIM User Resource
+    SCIMUserCreateRequest:
+      properties:
+        schemas:
+          items:
+            type: string
+          type: array
+          title: Schemas
+          default:
+          - urn:ietf:params:scim:schemas:core:2.0:User
+        externalId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Externalid
+        userName:
+          type: string
+          title: Username
+        name:
+          anyOf:
+          - $ref: '#/components/schemas/SCIMName'
+          - type: 'null'
+        displayName:
+          type: string
+          title: Displayname
+        emails:
+          items:
+            $ref: '#/components/schemas/SCIMEmail'
+          type: array
+          title: Emails
+        active:
+          type: boolean
+          title: Active
+          default: true
+        password:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Password
+        photos:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/SCIMPhoto'
+            type: array
+          - type: 'null'
+          title: Photos
+      type: object
+      required:
+      - userName
+      - displayName
+      - emails
+      title: SCIMUserCreateRequest
+      description: SCIM User Create Request
+    SCIMUserUpdateRequest:
+      properties:
+        schemas:
+          items:
+            type: string
+          type: array
+          title: Schemas
+          default:
+          - urn:ietf:params:scim:schemas:core:2.0:User
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        externalId:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Externalid
+        userName:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Username
+        name:
+          anyOf:
+          - $ref: '#/components/schemas/SCIMName'
+          - type: 'null'
+        displayName:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Displayname
+        emails:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/SCIMEmail'
+            type: array
+          - type: 'null'
+          title: Emails
+        active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Active
+        photos:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/SCIMPhoto'
+            type: array
+          - type: 'null'
+          title: Photos
+      type: object
+      title: SCIMUserUpdateRequest
+      description: SCIM User Update Request
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

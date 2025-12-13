@@ -1,0 +1,287 @@
+openapi: 3.1.0
+info:
+  title: Open WebUI - Memories API
+  description: API-Spezifikation für memories Router
+  version: 1.0.0
+paths:
+  /api/v1/memories/ef:
+    get:
+      tags:
+      - memories
+      summary: Get Embeddings
+      operationId: get_embeddings_api_v1_memories_ef_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /api/v1/memories/:
+    get:
+      tags:
+      - memories
+      summary: Get Memories
+      operationId: get_memories_api_v1_memories__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/MemoryModel'
+                type: array
+                title: Response Get Memories Api V1 Memories  Get
+      security:
+      - HTTPBearer: []
+  /api/v1/memories/add:
+    post:
+      tags:
+      - memories
+      summary: Add Memory
+      operationId: add_memory_api_v1_memories_add_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddMemoryForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/MemoryModel'
+                - type: 'null'
+                title: Response Add Memory Api V1 Memories Add Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/memories/query:
+    post:
+      tags:
+      - memories
+      summary: Query Memory
+      operationId: query_memory_api_v1_memories_query_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryMemoryForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/memories/reset:
+    post:
+      tags:
+      - memories
+      summary: Reset Memory From Vector Db
+      operationId: reset_memory_from_vector_db_api_v1_memories_reset_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: boolean
+                title: Response Reset Memory From Vector Db Api V1 Memories Reset
+                  Post
+      security:
+      - HTTPBearer: []
+  /api/v1/memories/delete/user:
+    delete:
+      tags:
+      - memories
+      summary: Delete Memory By User Id
+      operationId: delete_memory_by_user_id_api_v1_memories_delete_user_delete
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: boolean
+                title: Response Delete Memory By User Id Api V1 Memories Delete User
+                  Delete
+      security:
+      - HTTPBearer: []
+  /api/v1/memories/{memory_id}/update:
+    post:
+      tags:
+      - memories
+      summary: Update Memory By Id
+      operationId: update_memory_by_id_api_v1_memories__memory_id__update_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: memory_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Memory Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemoryUpdateModel'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/MemoryModel'
+                - type: 'null'
+                title: Response Update Memory By Id Api V1 Memories  Memory Id  Update
+                  Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/memories/{memory_id}:
+    delete:
+      tags:
+      - memories
+      summary: Delete Memory By Id
+      operationId: delete_memory_by_id_api_v1_memories__memory_id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: memory_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Memory Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: boolean
+                title: Response Delete Memory By Id Api V1 Memories  Memory Id  Delete
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AddMemoryForm:
+      properties:
+        content:
+          type: string
+          title: Content
+      type: object
+      required:
+      - content
+      title: AddMemoryForm
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    MemoryModel:
+      properties:
+        id:
+          type: string
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        content:
+          type: string
+          title: Content
+        updated_at:
+          type: integer
+          title: Updated At
+        created_at:
+          type: integer
+          title: Created At
+      type: object
+      required:
+      - id
+      - user_id
+      - content
+      - updated_at
+      - created_at
+      title: MemoryModel
+    MemoryUpdateModel:
+      properties:
+        content:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Content
+      type: object
+      title: MemoryUpdateModel
+    QueryMemoryForm:
+      properties:
+        content:
+          type: string
+          title: Content
+        k:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: K
+          default: 1
+      type: object
+      required:
+      - content
+      title: QueryMemoryForm
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

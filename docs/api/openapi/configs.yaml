@@ -1,0 +1,669 @@
+openapi: 3.1.0
+info:
+  title: Open WebUI - Configs API
+  description: API-Spezifikation für configs Router
+  version: 1.0.0
+paths:
+  /api/v1/configs/import:
+    post:
+      tags:
+      - configs
+      summary: Import Config
+      operationId: import_config_api_v1_configs_import_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportConfigForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Import Config Api V1 Configs Import Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/configs/export:
+    get:
+      tags:
+      - configs
+      summary: Export Config
+      operationId: export_config_api_v1_configs_export_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Export Config Api V1 Configs Export Get
+      security:
+      - HTTPBearer: []
+  /api/v1/configs/connections:
+    get:
+      tags:
+      - configs
+      summary: Get Connections Config
+      operationId: get_connections_config_api_v1_configs_connections_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionsConfigForm'
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - configs
+      summary: Set Connections Config
+      operationId: set_connections_config_api_v1_configs_connections_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectionsConfigForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionsConfigForm'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/configs/oauth/clients/register:
+    post:
+      tags:
+      - configs
+      summary: Register Oauth Client
+      operationId: register_oauth_client_api_v1_configs_oauth_clients_register_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OAuthClientRegistrationForm'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/configs/tool_servers:
+    get:
+      tags:
+      - configs
+      summary: Get Tool Servers Config
+      operationId: get_tool_servers_config_api_v1_configs_tool_servers_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToolServersConfigForm'
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - configs
+      summary: Set Tool Servers Config
+      operationId: set_tool_servers_config_api_v1_configs_tool_servers_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ToolServersConfigForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToolServersConfigForm'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/configs/tool_servers/verify:
+    post:
+      tags:
+      - configs
+      summary: Verify Tool Servers Config
+      description: Verify the connection to the tool server.
+      operationId: verify_tool_servers_config_api_v1_configs_tool_servers_verify_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ToolServerConnection'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/configs/code_execution:
+    get:
+      tags:
+      - configs
+      summary: Get Code Execution Config
+      operationId: get_code_execution_config_api_v1_configs_code_execution_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeInterpreterConfigForm'
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - configs
+      summary: Set Code Execution Config
+      operationId: set_code_execution_config_api_v1_configs_code_execution_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CodeInterpreterConfigForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeInterpreterConfigForm'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/configs/models:
+    get:
+      tags:
+      - configs
+      summary: Get Models Config
+      operationId: get_models_config_api_v1_configs_models_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelsConfigForm'
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - configs
+      summary: Set Models Config
+      operationId: set_models_config_api_v1_configs_models_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelsConfigForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelsConfigForm'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/configs/suggestions:
+    post:
+      tags:
+      - configs
+      summary: Set Default Suggestions
+      operationId: set_default_suggestions_api_v1_configs_suggestions_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetDefaultSuggestionsForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PromptSuggestion'
+                type: array
+                title: Response Set Default Suggestions Api V1 Configs Suggestions
+                  Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/configs/banners:
+    get:
+      tags:
+      - configs
+      summary: Get Banners
+      operationId: get_banners_api_v1_configs_banners_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BannerModel'
+                type: array
+                title: Response Get Banners Api V1 Configs Banners Get
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - configs
+      summary: Set Banners
+      operationId: set_banners_api_v1_configs_banners_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetBannersForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BannerModel'
+                type: array
+                title: Response Set Banners Api V1 Configs Banners Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    BannerModel:
+      properties:
+        id:
+          type: string
+          title: Id
+        type:
+          type: string
+          title: Type
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        content:
+          type: string
+          title: Content
+        dismissible:
+          type: boolean
+          title: Dismissible
+        timestamp:
+          type: integer
+          title: Timestamp
+      type: object
+      required:
+      - id
+      - type
+      - content
+      - dismissible
+      - timestamp
+      title: BannerModel
+    CodeInterpreterConfigForm:
+      properties:
+        ENABLE_CODE_EXECUTION:
+          type: boolean
+          title: Enable Code Execution
+        CODE_EXECUTION_ENGINE:
+          type: string
+          title: Code Execution Engine
+        CODE_EXECUTION_JUPYTER_URL:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Code Execution Jupyter Url
+        CODE_EXECUTION_JUPYTER_AUTH:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Code Execution Jupyter Auth
+        CODE_EXECUTION_JUPYTER_AUTH_TOKEN:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Code Execution Jupyter Auth Token
+        CODE_EXECUTION_JUPYTER_AUTH_PASSWORD:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Code Execution Jupyter Auth Password
+        CODE_EXECUTION_JUPYTER_TIMEOUT:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Code Execution Jupyter Timeout
+        ENABLE_CODE_INTERPRETER:
+          type: boolean
+          title: Enable Code Interpreter
+        CODE_INTERPRETER_ENGINE:
+          type: string
+          title: Code Interpreter Engine
+        CODE_INTERPRETER_PROMPT_TEMPLATE:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Code Interpreter Prompt Template
+        CODE_INTERPRETER_JUPYTER_URL:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Code Interpreter Jupyter Url
+        CODE_INTERPRETER_JUPYTER_AUTH:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Code Interpreter Jupyter Auth
+        CODE_INTERPRETER_JUPYTER_AUTH_TOKEN:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Code Interpreter Jupyter Auth Token
+        CODE_INTERPRETER_JUPYTER_AUTH_PASSWORD:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Code Interpreter Jupyter Auth Password
+        CODE_INTERPRETER_JUPYTER_TIMEOUT:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Code Interpreter Jupyter Timeout
+      type: object
+      required:
+      - ENABLE_CODE_EXECUTION
+      - CODE_EXECUTION_ENGINE
+      - CODE_EXECUTION_JUPYTER_URL
+      - CODE_EXECUTION_JUPYTER_AUTH
+      - CODE_EXECUTION_JUPYTER_AUTH_TOKEN
+      - CODE_EXECUTION_JUPYTER_AUTH_PASSWORD
+      - CODE_EXECUTION_JUPYTER_TIMEOUT
+      - ENABLE_CODE_INTERPRETER
+      - CODE_INTERPRETER_ENGINE
+      - CODE_INTERPRETER_PROMPT_TEMPLATE
+      - CODE_INTERPRETER_JUPYTER_URL
+      - CODE_INTERPRETER_JUPYTER_AUTH
+      - CODE_INTERPRETER_JUPYTER_AUTH_TOKEN
+      - CODE_INTERPRETER_JUPYTER_AUTH_PASSWORD
+      - CODE_INTERPRETER_JUPYTER_TIMEOUT
+      title: CodeInterpreterConfigForm
+    ConnectionsConfigForm:
+      properties:
+        ENABLE_DIRECT_CONNECTIONS:
+          type: boolean
+          title: Enable Direct Connections
+        ENABLE_BASE_MODELS_CACHE:
+          type: boolean
+          title: Enable Base Models Cache
+      type: object
+      required:
+      - ENABLE_DIRECT_CONNECTIONS
+      - ENABLE_BASE_MODELS_CACHE
+      title: ConnectionsConfigForm
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ImportConfigForm:
+      properties:
+        config:
+          additionalProperties: true
+          type: object
+          title: Config
+      type: object
+      required:
+      - config
+      title: ImportConfigForm
+    ModelsConfigForm:
+      properties:
+        DEFAULT_MODELS:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Default Models
+        DEFAULT_PINNED_MODELS:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Default Pinned Models
+        MODEL_ORDER_LIST:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Model Order List
+      type: object
+      required:
+      - DEFAULT_MODELS
+      - DEFAULT_PINNED_MODELS
+      - MODEL_ORDER_LIST
+      title: ModelsConfigForm
+    OAuthClientRegistrationForm:
+      properties:
+        url:
+          type: string
+          title: Url
+        client_id:
+          type: string
+          title: Client Id
+        client_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Name
+      type: object
+      required:
+      - url
+      - client_id
+      title: OAuthClientRegistrationForm
+    PromptSuggestion:
+      properties:
+        title:
+          items:
+            type: string
+          type: array
+          title: Title
+        content:
+          type: string
+          title: Content
+      type: object
+      required:
+      - title
+      - content
+      title: PromptSuggestion
+    SetBannersForm:
+      properties:
+        banners:
+          items:
+            $ref: '#/components/schemas/BannerModel'
+          type: array
+          title: Banners
+      type: object
+      required:
+      - banners
+      title: SetBannersForm
+    SetDefaultSuggestionsForm:
+      properties:
+        suggestions:
+          items:
+            $ref: '#/components/schemas/PromptSuggestion'
+          type: array
+          title: Suggestions
+      type: object
+      required:
+      - suggestions
+      title: SetDefaultSuggestionsForm
+    ToolServerConnection:
+      properties:
+        url:
+          type: string
+          title: Url
+        path:
+          type: string
+          title: Path
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+          default: openapi
+        auth_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Auth Type
+        headers:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: string
+          - type: 'null'
+          title: Headers
+        key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Key
+        config:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Config
+      additionalProperties: true
+      type: object
+      required:
+      - url
+      - path
+      - auth_type
+      - key
+      - config
+      title: ToolServerConnection
+    ToolServersConfigForm:
+      properties:
+        TOOL_SERVER_CONNECTIONS:
+          items:
+            $ref: '#/components/schemas/ToolServerConnection'
+          type: array
+          title: Tool Server Connections
+      type: object
+      required:
+      - TOOL_SERVER_CONNECTIONS
+      title: ToolServersConfigForm
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

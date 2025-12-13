@@ -1,0 +1,553 @@
+openapi: 3.1.0
+info:
+  title: Open WebUI - Files API
+  description: API-Spezifikation für files Router
+  version: 1.0.0
+paths:
+  /api/v1/files/:
+    post:
+      tags:
+      - files
+      summary: Upload File
+      operationId: upload_file_api_v1_files__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: process
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+          title: Process
+      - name: process_in_background
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+          title: Process In Background
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Body_upload_file_api_v1_files__post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileModelResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - files
+      summary: List Files
+      operationId: list_files_api_v1_files__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: content
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+          title: Content
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FileModelResponse'
+                title: Response List Files Api V1 Files  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/files/search:
+    get:
+      tags:
+      - files
+      summary: Search Files
+      description: Search for files by filename with support for wildcard patterns.
+      operationId: search_files_api_v1_files_search_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: filename
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Filename pattern to search for. Supports wildcards such as
+            '*.txt'
+          title: Filename
+        description: Filename pattern to search for. Supports wildcards such as '*.txt'
+      - name: content
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+          title: Content
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FileModelResponse'
+                title: Response Search Files Api V1 Files Search Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/files/all:
+    delete:
+      tags:
+      - files
+      summary: Delete All Files
+      operationId: delete_all_files_api_v1_files_all_delete
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      security:
+      - HTTPBearer: []
+  /api/v1/files/{id}:
+    get:
+      tags:
+      - files
+      summary: Get File By Id
+      operationId: get_file_by_id_api_v1_files__id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/FileModel'
+                - type: 'null'
+                title: Response Get File By Id Api V1 Files  Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - files
+      summary: Delete File By Id
+      operationId: delete_file_by_id_api_v1_files__id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/files/{id}/process/status:
+    get:
+      tags:
+      - files
+      summary: Get File Process Status
+      operationId: get_file_process_status_api_v1_files__id__process_status_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      - name: stream
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Stream
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/files/{id}/data/content:
+    get:
+      tags:
+      - files
+      summary: Get File Data Content By Id
+      operationId: get_file_data_content_by_id_api_v1_files__id__data_content_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/files/{id}/data/content/update:
+    post:
+      tags:
+      - files
+      summary: Update File Data Content By Id
+      operationId: update_file_data_content_by_id_api_v1_files__id__data_content_update_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentForm'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/files/{id}/content:
+    get:
+      tags:
+      - files
+      summary: Get File Content By Id
+      operationId: get_file_content_by_id_api_v1_files__id__content_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      - name: attachment
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Attachment
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/files/{id}/content/html:
+    get:
+      tags:
+      - files
+      summary: Get Html File Content By Id
+      operationId: get_html_file_content_by_id_api_v1_files__id__content_html_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/files/{id}/content/{file_name}:
+    get:
+      tags:
+      - files
+      summary: Get File Content By Id
+      operationId: get_file_content_by_id_api_v1_files__id__content__file_name__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    Body_upload_file_api_v1_files__post:
+      properties:
+        file:
+          type: string
+          format: binary
+          title: File
+        metadata:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: string
+          - type: 'null'
+          title: Metadata
+      type: object
+      required:
+      - file
+      title: Body_upload_file_api_v1_files__post
+    ContentForm:
+      properties:
+        content:
+          type: string
+          title: Content
+      type: object
+      required:
+      - content
+      title: ContentForm
+    FileMeta:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        content_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Content Type
+        size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Size
+      additionalProperties: true
+      type: object
+      title: FileMeta
+    FileModel:
+      properties:
+        id:
+          type: string
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        hash:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hash
+        filename:
+          type: string
+          title: Filename
+        path:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Path
+        data:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Data
+        meta:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Meta
+        access_control:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Access Control
+        created_at:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Updated At
+      type: object
+      required:
+      - id
+      - user_id
+      - filename
+      - created_at
+      - updated_at
+      title: FileModel
+    FileModelResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        hash:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hash
+        filename:
+          type: string
+          title: Filename
+        data:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Data
+        meta:
+          $ref: '#/components/schemas/FileMeta'
+        created_at:
+          type: integer
+          title: Created At
+        updated_at:
+          type: integer
+          title: Updated At
+      additionalProperties: true
+      type: object
+      required:
+      - id
+      - user_id
+      - filename
+      - meta
+      - created_at
+      - updated_at
+      title: FileModelResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

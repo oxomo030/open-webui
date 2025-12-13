@@ -1,0 +1,1446 @@
+openapi: 3.1.0
+info:
+  title: Open WebUI - Chats API
+  description: API-Spezifikation für chats Router
+  version: 1.0.0
+paths:
+  /api/v1/chats/list:
+    get:
+      tags:
+      - chats
+      summary: Get Session User Chat List
+      operationId: get_session_user_chat_list_api_v1_chats_list_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Page
+      - name: include_pinned
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Include Pinned
+      - name: include_folders
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Include Folders
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChatTitleIdResponse'
+                title: Response Get Session User Chat List Api V1 Chats List Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/:
+    get:
+      tags:
+      - chats
+      summary: Get Session User Chat List
+      operationId: get_session_user_chat_list_api_v1_chats__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Page
+      - name: include_pinned
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Include Pinned
+      - name: include_folders
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: false
+          title: Include Folders
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChatTitleIdResponse'
+                title: Response Get Session User Chat List Api V1 Chats  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - chats
+      summary: Delete All User Chats
+      operationId: delete_all_user_chats_api_v1_chats__delete
+      security:
+      - HTTPBearer: []
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: boolean
+                title: Response Delete All User Chats Api V1 Chats  Delete
+  /api/v1/chats/list/user/{user_id}:
+    get:
+      tags:
+      - chats
+      summary: Get User Chat List By User Id
+      operationId: get_user_chat_list_by_user_id_api_v1_chats_list_user__user_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      - name: page
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Page
+      - name: query
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Query
+      - name: order_by
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Order By
+      - name: direction
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Direction
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChatTitleIdResponse'
+                title: Response Get User Chat List By User Id Api V1 Chats List User  User
+                  Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/new:
+    post:
+      tags:
+      - chats
+      summary: Create New Chat
+      operationId: create_new_chat_api_v1_chats_new_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ChatResponse'
+                - type: 'null'
+                title: Response Create New Chat Api V1 Chats New Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/chats/import:
+    post:
+      tags:
+      - chats
+      summary: Import Chats
+      operationId: import_chats_api_v1_chats_import_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatsImportForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ChatResponse'
+                type: array
+                title: Response Import Chats Api V1 Chats Import Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/chats/search:
+    get:
+      tags:
+      - chats
+      summary: Search User Chats
+      operationId: search_user_chats_api_v1_chats_search_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: text
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Text
+      - name: page
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Page
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChatTitleIdResponse'
+                title: Response Search User Chats Api V1 Chats Search Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/folder/{folder_id}:
+    get:
+      tags:
+      - chats
+      summary: Get Chats By Folder Id
+      operationId: get_chats_by_folder_id_api_v1_chats_folder__folder_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: folder_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Folder Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChatResponse'
+                title: Response Get Chats By Folder Id Api V1 Chats Folder  Folder
+                  Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/folder/{folder_id}/list:
+    get:
+      tags:
+      - chats
+      summary: Get Chat List By Folder Id
+      operationId: get_chat_list_by_folder_id_api_v1_chats_folder__folder_id__list_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: folder_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Folder Id
+      - name: page
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: 1
+          title: Page
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/pinned:
+    get:
+      tags:
+      - chats
+      summary: Get User Pinned Chats
+      operationId: get_user_pinned_chats_api_v1_chats_pinned_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ChatTitleIdResponse'
+                type: array
+                title: Response Get User Pinned Chats Api V1 Chats Pinned Get
+      security:
+      - HTTPBearer: []
+  /api/v1/chats/all:
+    get:
+      tags:
+      - chats
+      summary: Get User Chats
+      operationId: get_user_chats_api_v1_chats_all_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ChatResponse'
+                type: array
+                title: Response Get User Chats Api V1 Chats All Get
+      security:
+      - HTTPBearer: []
+  /api/v1/chats/all/archived:
+    get:
+      tags:
+      - chats
+      summary: Get User Archived Chats
+      operationId: get_user_archived_chats_api_v1_chats_all_archived_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ChatResponse'
+                type: array
+                title: Response Get User Archived Chats Api V1 Chats All Archived
+                  Get
+      security:
+      - HTTPBearer: []
+  /api/v1/chats/all/tags:
+    get:
+      tags:
+      - chats
+      summary: Get All User Tags
+      operationId: get_all_user_tags_api_v1_chats_all_tags_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/TagModel'
+                type: array
+                title: Response Get All User Tags Api V1 Chats All Tags Get
+      security:
+      - HTTPBearer: []
+  /api/v1/chats/all/db:
+    get:
+      tags:
+      - chats
+      summary: Get All User Chats In Db
+      operationId: get_all_user_chats_in_db_api_v1_chats_all_db_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ChatResponse'
+                type: array
+                title: Response Get All User Chats In Db Api V1 Chats All Db Get
+      security:
+      - HTTPBearer: []
+  /api/v1/chats/archived:
+    get:
+      tags:
+      - chats
+      summary: Get Archived Session User Chat List
+      operationId: get_archived_session_user_chat_list_api_v1_chats_archived_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Page
+      - name: query
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Query
+      - name: order_by
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Order By
+      - name: direction
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Direction
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChatTitleIdResponse'
+                title: Response Get Archived Session User Chat List Api V1 Chats Archived
+                  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/archive/all:
+    post:
+      tags:
+      - chats
+      summary: Archive All Chats
+      operationId: archive_all_chats_api_v1_chats_archive_all_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: boolean
+                title: Response Archive All Chats Api V1 Chats Archive All Post
+      security:
+      - HTTPBearer: []
+  /api/v1/chats/unarchive/all:
+    post:
+      tags:
+      - chats
+      summary: Unarchive All Chats
+      operationId: unarchive_all_chats_api_v1_chats_unarchive_all_post
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: boolean
+                title: Response Unarchive All Chats Api V1 Chats Unarchive All Post
+      security:
+      - HTTPBearer: []
+  /api/v1/chats/share/{share_id}:
+    get:
+      tags:
+      - chats
+      summary: Get Shared Chat By Id
+      operationId: get_shared_chat_by_id_api_v1_chats_share__share_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: share_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Share Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ChatResponse'
+                - type: 'null'
+                title: Response Get Shared Chat By Id Api V1 Chats Share  Share Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/tags:
+    post:
+      tags:
+      - chats
+      summary: Get User Chat List By Tag Name
+      operationId: get_user_chat_list_by_tag_name_api_v1_chats_tags_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagFilterForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ChatTitleIdResponse'
+                type: array
+                title: Response Get User Chat List By Tag Name Api V1 Chats Tags Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/chats/{id}:
+    get:
+      tags:
+      - chats
+      summary: Get Chat By Id
+      operationId: get_chat_by_id_api_v1_chats__id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ChatResponse'
+                - type: 'null'
+                title: Response Get Chat By Id Api V1 Chats  Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - chats
+      summary: Update Chat By Id
+      operationId: update_chat_by_id_api_v1_chats__id__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatForm'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ChatResponse'
+                - type: 'null'
+                title: Response Update Chat By Id Api V1 Chats  Id  Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - chats
+      summary: Delete Chat By Id
+      operationId: delete_chat_by_id_api_v1_chats__id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: boolean
+                title: Response Delete Chat By Id Api V1 Chats  Id  Delete
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/{id}/messages/{message_id}:
+    post:
+      tags:
+      - chats
+      summary: Update Chat Message By Id
+      operationId: update_chat_message_by_id_api_v1_chats__id__messages__message_id__post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      - name: message_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Message Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageForm'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ChatResponse'
+                - type: 'null'
+                title: Response Update Chat Message By Id Api V1 Chats  Id  Messages  Message
+                  Id  Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/{id}/messages/{message_id}/event:
+    post:
+      tags:
+      - chats
+      summary: Send Chat Message Event By Id
+      operationId: send_chat_message_event_by_id_api_v1_chats__id__messages__message_id__event_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      - name: message_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Message Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventForm'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: boolean
+                - type: 'null'
+                title: Response Send Chat Message Event By Id Api V1 Chats  Id  Messages  Message
+                  Id  Event Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/{id}/pinned:
+    get:
+      tags:
+      - chats
+      summary: Get Pinned Status By Id
+      operationId: get_pinned_status_by_id_api_v1_chats__id__pinned_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: boolean
+                - type: 'null'
+                title: Response Get Pinned Status By Id Api V1 Chats  Id  Pinned Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/{id}/pin:
+    post:
+      tags:
+      - chats
+      summary: Pin Chat By Id
+      operationId: pin_chat_by_id_api_v1_chats__id__pin_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ChatResponse'
+                - type: 'null'
+                title: Response Pin Chat By Id Api V1 Chats  Id  Pin Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/{id}/clone:
+    post:
+      tags:
+      - chats
+      summary: Clone Chat By Id
+      operationId: clone_chat_by_id_api_v1_chats__id__clone_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloneForm'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ChatResponse'
+                - type: 'null'
+                title: Response Clone Chat By Id Api V1 Chats  Id  Clone Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/{id}/clone/shared:
+    post:
+      tags:
+      - chats
+      summary: Clone Shared Chat By Id
+      operationId: clone_shared_chat_by_id_api_v1_chats__id__clone_shared_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ChatResponse'
+                - type: 'null'
+                title: Response Clone Shared Chat By Id Api V1 Chats  Id  Clone Shared
+                  Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/{id}/archive:
+    post:
+      tags:
+      - chats
+      summary: Archive Chat By Id
+      operationId: archive_chat_by_id_api_v1_chats__id__archive_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ChatResponse'
+                - type: 'null'
+                title: Response Archive Chat By Id Api V1 Chats  Id  Archive Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/{id}/share:
+    post:
+      tags:
+      - chats
+      summary: Share Chat By Id
+      operationId: share_chat_by_id_api_v1_chats__id__share_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ChatResponse'
+                - type: 'null'
+                title: Response Share Chat By Id Api V1 Chats  Id  Share Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - chats
+      summary: Delete Shared Chat By Id
+      operationId: delete_shared_chat_by_id_api_v1_chats__id__share_delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: boolean
+                - type: 'null'
+                title: Response Delete Shared Chat By Id Api V1 Chats  Id  Share Delete
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/{id}/folder:
+    post:
+      tags:
+      - chats
+      summary: Update Chat Folder Id By Id
+      operationId: update_chat_folder_id_by_id_api_v1_chats__id__folder_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatFolderIdForm'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ChatResponse'
+                - type: 'null'
+                title: Response Update Chat Folder Id By Id Api V1 Chats  Id  Folder
+                  Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/{id}/tags:
+    get:
+      tags:
+      - chats
+      summary: Get Chat Tags By Id
+      operationId: get_chat_tags_by_id_api_v1_chats__id__tags_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TagModel'
+                title: Response Get Chat Tags By Id Api V1 Chats  Id  Tags Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - chats
+      summary: Add Tag By Id And Tag Name
+      operationId: add_tag_by_id_and_tag_name_api_v1_chats__id__tags_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagForm'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TagModel'
+                title: Response Add Tag By Id And Tag Name Api V1 Chats  Id  Tags
+                  Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - chats
+      summary: Delete Tag By Id And Tag Name
+      operationId: delete_tag_by_id_and_tag_name_api_v1_chats__id__tags_delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagForm'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TagModel'
+                title: Response Delete Tag By Id And Tag Name Api V1 Chats  Id  Tags
+                  Delete
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/chats/{id}/tags/all:
+    delete:
+      tags:
+      - chats
+      summary: Delete All Tags By Id
+      operationId: delete_all_tags_by_id_api_v1_chats__id__tags_all_delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - type: boolean
+                - type: 'null'
+                title: Response Delete All Tags By Id Api V1 Chats  Id  Tags All Delete
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ChatFolderIdForm:
+      properties:
+        folder_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Folder Id
+      type: object
+      title: ChatFolderIdForm
+    ChatForm:
+      properties:
+        chat:
+          additionalProperties: true
+          type: object
+          title: Chat
+        folder_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Folder Id
+      type: object
+      required:
+      - chat
+      title: ChatForm
+    ChatImportForm:
+      properties:
+        chat:
+          additionalProperties: true
+          type: object
+          title: Chat
+        folder_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Folder Id
+        meta:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Meta
+          default: {}
+        pinned:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Pinned
+          default: false
+        created_at:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Updated At
+      type: object
+      required:
+      - chat
+      title: ChatImportForm
+    ChatResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        title:
+          type: string
+          title: Title
+        chat:
+          additionalProperties: true
+          type: object
+          title: Chat
+        updated_at:
+          type: integer
+          title: Updated At
+        created_at:
+          type: integer
+          title: Created At
+        share_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Share Id
+        archived:
+          type: boolean
+          title: Archived
+        pinned:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Pinned
+          default: false
+        meta:
+          additionalProperties: true
+          type: object
+          title: Meta
+          default: {}
+        folder_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Folder Id
+      type: object
+      required:
+      - id
+      - user_id
+      - title
+      - chat
+      - updated_at
+      - created_at
+      - archived
+      title: ChatResponse
+    ChatTitleIdResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        title:
+          type: string
+          title: Title
+        updated_at:
+          type: integer
+          title: Updated At
+        created_at:
+          type: integer
+          title: Created At
+      type: object
+      required:
+      - id
+      - title
+      - updated_at
+      - created_at
+      title: ChatTitleIdResponse
+    ChatsImportForm:
+      properties:
+        chats:
+          items:
+            $ref: '#/components/schemas/ChatImportForm'
+          type: array
+          title: Chats
+      type: object
+      required:
+      - chats
+      title: ChatsImportForm
+    CloneForm:
+      properties:
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+      type: object
+      title: CloneForm
+    EventForm:
+      properties:
+        type:
+          type: string
+          title: Type
+        data:
+          additionalProperties: true
+          type: object
+          title: Data
+      type: object
+      required:
+      - type
+      - data
+      title: EventForm
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    MessageForm:
+      properties:
+        content:
+          type: string
+          title: Content
+      type: object
+      required:
+      - content
+      title: MessageForm
+    TagFilterForm:
+      properties:
+        name:
+          type: string
+          title: Name
+        skip:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Skip
+          default: 0
+        limit:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Limit
+          default: 50
+      type: object
+      required:
+      - name
+      title: TagFilterForm
+    TagForm:
+      properties:
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+      - name
+      title: TagForm
+    TagModel:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        user_id:
+          type: string
+          title: User Id
+        meta:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Meta
+      type: object
+      required:
+      - id
+      - name
+      - user_id
+      title: TagModel
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
