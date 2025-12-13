@@ -1,0 +1,611 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Open WebUI - Tasks API",
+    "description": "API-Spezifikation für tasks Router",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/v1/tasks/config": {
+      "get": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Get Task Config",
+        "operationId": "get_task_config_api_v1_tasks_config_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/tasks/config/update": {
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Update Task Config",
+        "operationId": "update_task_config_api_v1_tasks_config_update_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskConfigForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/tasks/title/completions": {
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Generate Title",
+        "operationId": "generate_title_api_v1_tasks_title_completions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Form Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/tasks/follow_up/completions": {
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Generate Follow Ups",
+        "operationId": "generate_follow_ups_api_v1_tasks_follow_up_completions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Form Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/tasks/tags/completions": {
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Generate Chat Tags",
+        "operationId": "generate_chat_tags_api_v1_tasks_tags_completions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Form Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/tasks/image_prompt/completions": {
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Generate Image Prompt",
+        "operationId": "generate_image_prompt_api_v1_tasks_image_prompt_completions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Form Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/tasks/queries/completions": {
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Generate Queries",
+        "operationId": "generate_queries_api_v1_tasks_queries_completions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Form Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/tasks/auto/completions": {
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Generate Autocompletion",
+        "operationId": "generate_autocompletion_api_v1_tasks_auto_completions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Form Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/tasks/emoji/completions": {
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Generate Emoji",
+        "operationId": "generate_emoji_api_v1_tasks_emoji_completions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Form Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/tasks/moa/completions": {
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Generate Moa Response",
+        "operationId": "generate_moa_response_api_v1_tasks_moa_completions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": true,
+                "type": "object",
+                "title": "Form Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "TaskConfigForm": {
+        "properties": {
+          "TASK_MODEL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Task Model"
+          },
+          "TASK_MODEL_EXTERNAL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Task Model External"
+          },
+          "ENABLE_TITLE_GENERATION": {
+            "type": "boolean",
+            "title": "Enable Title Generation"
+          },
+          "TITLE_GENERATION_PROMPT_TEMPLATE": {
+            "type": "string",
+            "title": "Title Generation Prompt Template"
+          },
+          "IMAGE_PROMPT_GENERATION_PROMPT_TEMPLATE": {
+            "type": "string",
+            "title": "Image Prompt Generation Prompt Template"
+          },
+          "ENABLE_AUTOCOMPLETE_GENERATION": {
+            "type": "boolean",
+            "title": "Enable Autocomplete Generation"
+          },
+          "AUTOCOMPLETE_GENERATION_INPUT_MAX_LENGTH": {
+            "type": "integer",
+            "title": "Autocomplete Generation Input Max Length"
+          },
+          "TAGS_GENERATION_PROMPT_TEMPLATE": {
+            "type": "string",
+            "title": "Tags Generation Prompt Template"
+          },
+          "FOLLOW_UP_GENERATION_PROMPT_TEMPLATE": {
+            "type": "string",
+            "title": "Follow Up Generation Prompt Template"
+          },
+          "ENABLE_FOLLOW_UP_GENERATION": {
+            "type": "boolean",
+            "title": "Enable Follow Up Generation"
+          },
+          "ENABLE_TAGS_GENERATION": {
+            "type": "boolean",
+            "title": "Enable Tags Generation"
+          },
+          "ENABLE_SEARCH_QUERY_GENERATION": {
+            "type": "boolean",
+            "title": "Enable Search Query Generation"
+          },
+          "ENABLE_RETRIEVAL_QUERY_GENERATION": {
+            "type": "boolean",
+            "title": "Enable Retrieval Query Generation"
+          },
+          "QUERY_GENERATION_PROMPT_TEMPLATE": {
+            "type": "string",
+            "title": "Query Generation Prompt Template"
+          },
+          "TOOLS_FUNCTION_CALLING_PROMPT_TEMPLATE": {
+            "type": "string",
+            "title": "Tools Function Calling Prompt Template"
+          },
+          "VOICE_MODE_PROMPT_TEMPLATE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Voice Mode Prompt Template"
+          }
+        },
+        "type": "object",
+        "required": [
+          "TASK_MODEL",
+          "TASK_MODEL_EXTERNAL",
+          "ENABLE_TITLE_GENERATION",
+          "TITLE_GENERATION_PROMPT_TEMPLATE",
+          "IMAGE_PROMPT_GENERATION_PROMPT_TEMPLATE",
+          "ENABLE_AUTOCOMPLETE_GENERATION",
+          "AUTOCOMPLETE_GENERATION_INPUT_MAX_LENGTH",
+          "TAGS_GENERATION_PROMPT_TEMPLATE",
+          "FOLLOW_UP_GENERATION_PROMPT_TEMPLATE",
+          "ENABLE_FOLLOW_UP_GENERATION",
+          "ENABLE_TAGS_GENERATION",
+          "ENABLE_SEARCH_QUERY_GENERATION",
+          "ENABLE_RETRIEVAL_QUERY_GENERATION",
+          "QUERY_GENERATION_PROMPT_TEMPLATE",
+          "TOOLS_FUNCTION_CALLING_PROMPT_TEMPLATE",
+          "VOICE_MODE_PROMPT_TEMPLATE"
+        ],
+        "title": "TaskConfigForm"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

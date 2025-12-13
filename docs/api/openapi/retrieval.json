@@ -1,0 +1,2467 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Open WebUI - Retrieval API",
+    "description": "API-Spezifikation für retrieval Router",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/v1/retrieval/": {
+      "get": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Get Status",
+        "operationId": "get_status_api_v1_retrieval__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/retrieval/embedding": {
+      "get": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Get Embedding Config",
+        "operationId": "get_embedding_config_api_v1_retrieval_embedding_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/retrieval/embedding/update": {
+      "post": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Update Embedding Config",
+        "operationId": "update_embedding_config_api_v1_retrieval_embedding_update_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmbeddingModelUpdateForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/retrieval/config": {
+      "get": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Get Rag Config",
+        "operationId": "get_rag_config_api_v1_retrieval_config_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/retrieval/config/update": {
+      "post": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Update Rag Config",
+        "operationId": "update_rag_config_api_v1_retrieval_config_update_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfigForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/retrieval/process/file": {
+      "post": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Process File",
+        "description": "Process a file and save its content to the vector database.",
+        "operationId": "process_file_api_v1_retrieval_process_file_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessFileForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/retrieval/process/text": {
+      "post": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Process Text",
+        "operationId": "process_text_api_v1_retrieval_process_text_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessTextForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/retrieval/process/web": {
+      "post": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Process Web",
+        "operationId": "process_web_api_v1_retrieval_process_web_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessUrlForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/retrieval/process/youtube": {
+      "post": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Process Web",
+        "operationId": "process_web_api_v1_retrieval_process_youtube_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessUrlForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/retrieval/process/web/search": {
+      "post": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Process Web Search",
+        "operationId": "process_web_search_api_v1_retrieval_process_web_search_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/retrieval/query/doc": {
+      "post": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Query Doc Handler",
+        "operationId": "query_doc_handler_api_v1_retrieval_query_doc_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryDocForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/retrieval/query/collection": {
+      "post": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Query Collection Handler",
+        "operationId": "query_collection_handler_api_v1_retrieval_query_collection_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryCollectionsForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/retrieval/delete": {
+      "post": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Delete Entries From Collection",
+        "operationId": "delete_entries_from_collection_api_v1_retrieval_delete_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/retrieval/reset/db": {
+      "post": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Reset Vector Db",
+        "operationId": "reset_vector_db_api_v1_retrieval_reset_db_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/retrieval/reset/uploads": {
+      "post": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Reset Upload Dir",
+        "operationId": "reset_upload_dir_api_v1_retrieval_reset_uploads_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean",
+                  "title": "Response Reset Upload Dir Api V1 Retrieval Reset Uploads Post"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/retrieval/ef/{text}": {
+      "get": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Get Embeddings",
+        "operationId": "get_embeddings_api_v1_retrieval_ef__text__get",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Text"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/retrieval/process/files/batch": {
+      "post": {
+        "tags": [
+          "retrieval"
+        ],
+        "summary": "Process Files Batch",
+        "description": "Process a batch of files and save them to the vector database.",
+        "operationId": "process_files_batch_api_v1_retrieval_process_files_batch_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchProcessFilesForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BatchProcessFilesResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AzureOpenAIConfigForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "key",
+          "version"
+        ],
+        "title": "AzureOpenAIConfigForm"
+      },
+      "BatchProcessFilesForm": {
+        "properties": {
+          "files": {
+            "items": {
+              "$ref": "#/components/schemas/FileModel"
+            },
+            "type": "array",
+            "title": "Files"
+          },
+          "collection_name": {
+            "type": "string",
+            "title": "Collection Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "files",
+          "collection_name"
+        ],
+        "title": "BatchProcessFilesForm"
+      },
+      "BatchProcessFilesResponse": {
+        "properties": {
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/BatchProcessFilesResult"
+            },
+            "type": "array",
+            "title": "Results"
+          },
+          "errors": {
+            "items": {
+              "$ref": "#/components/schemas/BatchProcessFilesResult"
+            },
+            "type": "array",
+            "title": "Errors"
+          }
+        },
+        "type": "object",
+        "required": [
+          "results",
+          "errors"
+        ],
+        "title": "BatchProcessFilesResponse"
+      },
+      "BatchProcessFilesResult": {
+        "properties": {
+          "file_id": {
+            "type": "string",
+            "title": "File Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file_id",
+          "status"
+        ],
+        "title": "BatchProcessFilesResult"
+      },
+      "ConfigForm": {
+        "properties": {
+          "RAG_TEMPLATE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag Template"
+          },
+          "TOP_K": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Top K"
+          },
+          "BYPASS_EMBEDDING_AND_RETRIEVAL": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bypass Embedding And Retrieval"
+          },
+          "RAG_FULL_CONTEXT": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag Full Context"
+          },
+          "ENABLE_RAG_HYBRID_SEARCH": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Rag Hybrid Search"
+          },
+          "ENABLE_RAG_HYBRID_SEARCH_ENRICHED_TEXTS": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Rag Hybrid Search Enriched Texts"
+          },
+          "TOP_K_RERANKER": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Top K Reranker"
+          },
+          "RELEVANCE_THRESHOLD": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Relevance Threshold"
+          },
+          "HYBRID_BM25_WEIGHT": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hybrid Bm25 Weight"
+          },
+          "CONTENT_EXTRACTION_ENGINE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content Extraction Engine"
+          },
+          "PDF_EXTRACT_IMAGES": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pdf Extract Images"
+          },
+          "DATALAB_MARKER_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Api Key"
+          },
+          "DATALAB_MARKER_API_BASE_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Api Base Url"
+          },
+          "DATALAB_MARKER_ADDITIONAL_CONFIG": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Additional Config"
+          },
+          "DATALAB_MARKER_SKIP_CACHE": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Skip Cache"
+          },
+          "DATALAB_MARKER_FORCE_OCR": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Force Ocr"
+          },
+          "DATALAB_MARKER_PAGINATE": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Paginate"
+          },
+          "DATALAB_MARKER_STRIP_EXISTING_OCR": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Strip Existing Ocr"
+          },
+          "DATALAB_MARKER_DISABLE_IMAGE_EXTRACTION": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Disable Image Extraction"
+          },
+          "DATALAB_MARKER_FORMAT_LINES": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Format Lines"
+          },
+          "DATALAB_MARKER_USE_LLM": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Use Llm"
+          },
+          "DATALAB_MARKER_OUTPUT_FORMAT": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datalab Marker Output Format"
+          },
+          "EXTERNAL_DOCUMENT_LOADER_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Document Loader Url"
+          },
+          "EXTERNAL_DOCUMENT_LOADER_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Document Loader Api Key"
+          },
+          "TIKA_SERVER_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tika Server Url"
+          },
+          "DOCLING_SERVER_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Server Url"
+          },
+          "DOCLING_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Api Key"
+          },
+          "DOCLING_PARAMS": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Docling Params"
+          },
+          "DOCUMENT_INTELLIGENCE_ENDPOINT": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Document Intelligence Endpoint"
+          },
+          "DOCUMENT_INTELLIGENCE_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Document Intelligence Key"
+          },
+          "MISTRAL_OCR_API_BASE_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mistral Ocr Api Base Url"
+          },
+          "MISTRAL_OCR_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mistral Ocr Api Key"
+          },
+          "MINERU_API_MODE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mineru Api Mode"
+          },
+          "MINERU_API_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mineru Api Url"
+          },
+          "MINERU_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mineru Api Key"
+          },
+          "MINERU_PARAMS": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mineru Params"
+          },
+          "RAG_RERANKING_MODEL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag Reranking Model"
+          },
+          "RAG_RERANKING_ENGINE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag Reranking Engine"
+          },
+          "RAG_EXTERNAL_RERANKER_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag External Reranker Url"
+          },
+          "RAG_EXTERNAL_RERANKER_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag External Reranker Api Key"
+          },
+          "TEXT_SPLITTER": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text Splitter"
+          },
+          "CHUNK_SIZE": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Chunk Size"
+          },
+          "CHUNK_OVERLAP": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Chunk Overlap"
+          },
+          "FILE_MAX_SIZE": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Max Size"
+          },
+          "FILE_MAX_COUNT": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Max Count"
+          },
+          "FILE_IMAGE_COMPRESSION_WIDTH": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Image Compression Width"
+          },
+          "FILE_IMAGE_COMPRESSION_HEIGHT": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "File Image Compression Height"
+          },
+          "ALLOWED_FILE_EXTENSIONS": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Allowed File Extensions"
+          },
+          "ENABLE_GOOGLE_DRIVE_INTEGRATION": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Google Drive Integration"
+          },
+          "ENABLE_ONEDRIVE_INTEGRATION": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Onedrive Integration"
+          },
+          "web": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WebConfig"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "ConfigForm"
+      },
+      "DeleteForm": {
+        "properties": {
+          "collection_name": {
+            "type": "string",
+            "title": "Collection Name"
+          },
+          "file_id": {
+            "type": "string",
+            "title": "File Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "collection_name",
+          "file_id"
+        ],
+        "title": "DeleteForm"
+      },
+      "EmbeddingModelUpdateForm": {
+        "properties": {
+          "openai_config": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAIConfigForm"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "ollama_config": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OllamaConfigForm"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "azure_openai_config": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AzureOpenAIConfigForm"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "RAG_EMBEDDING_ENGINE": {
+            "type": "string",
+            "title": "Rag Embedding Engine"
+          },
+          "RAG_EMBEDDING_MODEL": {
+            "type": "string",
+            "title": "Rag Embedding Model"
+          },
+          "RAG_EMBEDDING_BATCH_SIZE": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rag Embedding Batch Size",
+            "default": 1
+          },
+          "ENABLE_ASYNC_EMBEDDING": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Async Embedding",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "RAG_EMBEDDING_ENGINE",
+          "RAG_EMBEDDING_MODEL"
+        ],
+        "title": "EmbeddingModelUpdateForm"
+      },
+      "FileModel": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "hash": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hash"
+          },
+          "filename": {
+            "type": "string",
+            "title": "Filename"
+          },
+          "path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Path"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          },
+          "access_control": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Control"
+          },
+          "created_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created At"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "filename",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "FileModel"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "OllamaConfigForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "key": {
+            "type": "string",
+            "title": "Key"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "key"
+        ],
+        "title": "OllamaConfigForm"
+      },
+      "OpenAIConfigForm": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "key": {
+            "type": "string",
+            "title": "Key"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "key"
+        ],
+        "title": "OpenAIConfigForm"
+      },
+      "ProcessFileForm": {
+        "properties": {
+          "file_id": {
+            "type": "string",
+            "title": "File Id"
+          },
+          "content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content"
+          },
+          "collection_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Collection Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file_id"
+        ],
+        "title": "ProcessFileForm"
+      },
+      "ProcessTextForm": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "collection_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Collection Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "content"
+        ],
+        "title": "ProcessTextForm"
+      },
+      "ProcessUrlForm": {
+        "properties": {
+          "collection_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Collection Name"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "ProcessUrlForm"
+      },
+      "QueryCollectionsForm": {
+        "properties": {
+          "collection_names": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Collection Names"
+          },
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "k": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "K"
+          },
+          "k_reranker": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "K Reranker"
+          },
+          "r": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "R"
+          },
+          "hybrid": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hybrid"
+          },
+          "hybrid_bm25_weight": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hybrid Bm25 Weight"
+          },
+          "enable_enriched_texts": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Enriched Texts"
+          }
+        },
+        "type": "object",
+        "required": [
+          "collection_names",
+          "query"
+        ],
+        "title": "QueryCollectionsForm"
+      },
+      "QueryDocForm": {
+        "properties": {
+          "collection_name": {
+            "type": "string",
+            "title": "Collection Name"
+          },
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "k": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "K"
+          },
+          "k_reranker": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "K Reranker"
+          },
+          "r": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "R"
+          },
+          "hybrid": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hybrid"
+          }
+        },
+        "type": "object",
+        "required": [
+          "collection_name",
+          "query"
+        ],
+        "title": "QueryDocForm"
+      },
+      "SearchForm": {
+        "properties": {
+          "queries": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Queries"
+          }
+        },
+        "type": "object",
+        "required": [
+          "queries"
+        ],
+        "title": "SearchForm"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "WebConfig": {
+        "properties": {
+          "ENABLE_WEB_SEARCH": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Web Search"
+          },
+          "WEB_SEARCH_ENGINE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Web Search Engine"
+          },
+          "WEB_SEARCH_TRUST_ENV": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Web Search Trust Env"
+          },
+          "WEB_SEARCH_RESULT_COUNT": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Web Search Result Count"
+          },
+          "WEB_SEARCH_CONCURRENT_REQUESTS": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Web Search Concurrent Requests"
+          },
+          "WEB_LOADER_CONCURRENT_REQUESTS": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Web Loader Concurrent Requests"
+          },
+          "WEB_SEARCH_DOMAIN_FILTER_LIST": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Web Search Domain Filter List",
+            "default": []
+          },
+          "BYPASS_WEB_SEARCH_EMBEDDING_AND_RETRIEVAL": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bypass Web Search Embedding And Retrieval"
+          },
+          "BYPASS_WEB_SEARCH_WEB_LOADER": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bypass Web Search Web Loader"
+          },
+          "OLLAMA_CLOUD_WEB_SEARCH_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ollama Cloud Web Search Api Key"
+          },
+          "SEARXNG_QUERY_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Searxng Query Url"
+          },
+          "YACY_QUERY_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Yacy Query Url"
+          },
+          "YACY_USERNAME": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Yacy Username"
+          },
+          "YACY_PASSWORD": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Yacy Password"
+          },
+          "GOOGLE_PSE_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Google Pse Api Key"
+          },
+          "GOOGLE_PSE_ENGINE_ID": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Google Pse Engine Id"
+          },
+          "BRAVE_SEARCH_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Brave Search Api Key"
+          },
+          "KAGI_SEARCH_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Kagi Search Api Key"
+          },
+          "MOJEEK_SEARCH_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mojeek Search Api Key"
+          },
+          "BOCHA_SEARCH_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bocha Search Api Key"
+          },
+          "SERPSTACK_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Serpstack Api Key"
+          },
+          "SERPSTACK_HTTPS": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Serpstack Https"
+          },
+          "SERPER_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Serper Api Key"
+          },
+          "SERPLY_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Serply Api Key"
+          },
+          "TAVILY_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tavily Api Key"
+          },
+          "SEARCHAPI_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Searchapi Api Key"
+          },
+          "SEARCHAPI_ENGINE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Searchapi Engine"
+          },
+          "SERPAPI_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Serpapi Api Key"
+          },
+          "SERPAPI_ENGINE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Serpapi Engine"
+          },
+          "JINA_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Jina Api Key"
+          },
+          "BING_SEARCH_V7_ENDPOINT": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bing Search V7 Endpoint"
+          },
+          "BING_SEARCH_V7_SUBSCRIPTION_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bing Search V7 Subscription Key"
+          },
+          "EXA_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exa Api Key"
+          },
+          "PERPLEXITY_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Perplexity Api Key"
+          },
+          "PERPLEXITY_MODEL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Perplexity Model"
+          },
+          "PERPLEXITY_SEARCH_CONTEXT_USAGE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Perplexity Search Context Usage"
+          },
+          "PERPLEXITY_SEARCH_API_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Perplexity Search Api Url"
+          },
+          "SOUGOU_API_SID": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sougou Api Sid"
+          },
+          "SOUGOU_API_SK": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sougou Api Sk"
+          },
+          "WEB_LOADER_ENGINE": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Web Loader Engine"
+          },
+          "ENABLE_WEB_LOADER_SSL_VERIFICATION": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enable Web Loader Ssl Verification"
+          },
+          "PLAYWRIGHT_WS_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Playwright Ws Url"
+          },
+          "PLAYWRIGHT_TIMEOUT": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Playwright Timeout"
+          },
+          "FIRECRAWL_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Firecrawl Api Key"
+          },
+          "FIRECRAWL_API_BASE_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Firecrawl Api Base Url"
+          },
+          "TAVILY_EXTRACT_DEPTH": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tavily Extract Depth"
+          },
+          "EXTERNAL_WEB_SEARCH_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Web Search Url"
+          },
+          "EXTERNAL_WEB_SEARCH_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Web Search Api Key"
+          },
+          "EXTERNAL_WEB_LOADER_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Web Loader Url"
+          },
+          "EXTERNAL_WEB_LOADER_API_KEY": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Web Loader Api Key"
+          },
+          "YOUTUBE_LOADER_LANGUAGE": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Youtube Loader Language"
+          },
+          "YOUTUBE_LOADER_PROXY_URL": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Youtube Loader Proxy Url"
+          },
+          "YOUTUBE_LOADER_TRANSLATION": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Youtube Loader Translation"
+          }
+        },
+        "type": "object",
+        "title": "WebConfig"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

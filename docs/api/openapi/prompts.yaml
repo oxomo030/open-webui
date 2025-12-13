@@ -1,0 +1,321 @@
+openapi: 3.1.0
+info:
+  title: Open WebUI - Prompts API
+  description: API-Spezifikation für prompts Router
+  version: 1.0.0
+paths:
+  /api/v1/prompts/:
+    get:
+      tags:
+      - prompts
+      summary: Get Prompts
+      operationId: get_prompts_api_v1_prompts__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PromptModel'
+                type: array
+                title: Response Get Prompts Api V1 Prompts  Get
+      security:
+      - HTTPBearer: []
+  /api/v1/prompts/list:
+    get:
+      tags:
+      - prompts
+      summary: Get Prompt List
+      operationId: get_prompt_list_api_v1_prompts_list_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PromptUserResponse'
+                type: array
+                title: Response Get Prompt List Api V1 Prompts List Get
+      security:
+      - HTTPBearer: []
+  /api/v1/prompts/create:
+    post:
+      tags:
+      - prompts
+      summary: Create New Prompt
+      operationId: create_new_prompt_api_v1_prompts_create_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromptForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/PromptModel'
+                - type: 'null'
+                title: Response Create New Prompt Api V1 Prompts Create Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/prompts/command/{command}:
+    get:
+      tags:
+      - prompts
+      summary: Get Prompt By Command
+      operationId: get_prompt_by_command_api_v1_prompts_command__command__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: command
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Command
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/PromptModel'
+                - type: 'null'
+                title: Response Get Prompt By Command Api V1 Prompts Command  Command  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/prompts/command/{command}/update:
+    post:
+      tags:
+      - prompts
+      summary: Update Prompt By Command
+      operationId: update_prompt_by_command_api_v1_prompts_command__command__update_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: command
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Command
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromptForm'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/PromptModel'
+                - type: 'null'
+                title: Response Update Prompt By Command Api V1 Prompts Command  Command  Update
+                  Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/prompts/command/{command}/delete:
+    delete:
+      tags:
+      - prompts
+      summary: Delete Prompt By Command
+      operationId: delete_prompt_by_command_api_v1_prompts_command__command__delete_delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: command
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Command
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: boolean
+                title: Response Delete Prompt By Command Api V1 Prompts Command  Command  Delete
+                  Delete
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PromptForm:
+      properties:
+        command:
+          type: string
+          title: Command
+        title:
+          type: string
+          title: Title
+        content:
+          type: string
+          title: Content
+        access_control:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Access Control
+      type: object
+      required:
+      - command
+      - title
+      - content
+      title: PromptForm
+    PromptModel:
+      properties:
+        command:
+          type: string
+          title: Command
+        user_id:
+          type: string
+          title: User Id
+        title:
+          type: string
+          title: Title
+        content:
+          type: string
+          title: Content
+        timestamp:
+          type: integer
+          title: Timestamp
+        access_control:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Access Control
+      type: object
+      required:
+      - command
+      - user_id
+      - title
+      - content
+      - timestamp
+      title: PromptModel
+    PromptUserResponse:
+      properties:
+        command:
+          type: string
+          title: Command
+        user_id:
+          type: string
+          title: User Id
+        title:
+          type: string
+          title: Title
+        content:
+          type: string
+          title: Content
+        timestamp:
+          type: integer
+          title: Timestamp
+        access_control:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Access Control
+        user:
+          anyOf:
+          - $ref: '#/components/schemas/UserResponse'
+          - type: 'null'
+      type: object
+      required:
+      - command
+      - user_id
+      - title
+      - content
+      - timestamp
+      title: PromptUserResponse
+    UserResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        email:
+          type: string
+          title: Email
+        role:
+          type: string
+          title: Role
+        profile_image_url:
+          type: string
+          title: Profile Image Url
+      type: object
+      required:
+      - id
+      - name
+      - email
+      - role
+      - profile_image_url
+      title: UserResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

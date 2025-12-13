@@ -1,0 +1,407 @@
+openapi: 3.1.0
+info:
+  title: Open WebUI - Folders API
+  description: API-Spezifikation für folders Router
+  version: 1.0.0
+paths:
+  /api/v1/folders/:
+    get:
+      tags:
+      - folders
+      summary: Get Folders
+      operationId: get_folders_api_v1_folders__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/FolderNameIdResponse'
+                type: array
+                title: Response Get Folders Api V1 Folders  Get
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - folders
+      summary: Create Folder
+      operationId: create_folder_api_v1_folders__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/folders/{id}:
+    get:
+      tags:
+      - folders
+      summary: Get Folder By Id
+      operationId: get_folder_by_id_api_v1_folders__id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/FolderModel'
+                - type: 'null'
+                title: Response Get Folder By Id Api V1 Folders  Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - folders
+      summary: Delete Folder By Id
+      operationId: delete_folder_by_id_api_v1_folders__id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      - name: delete_contents
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          default: true
+          title: Delete Contents
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/folders/{id}/update:
+    post:
+      tags:
+      - folders
+      summary: Update Folder Name By Id
+      operationId: update_folder_name_by_id_api_v1_folders__id__update_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderUpdateForm'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/folders/{id}/update/parent:
+    post:
+      tags:
+      - folders
+      summary: Update Folder Parent Id By Id
+      operationId: update_folder_parent_id_by_id_api_v1_folders__id__update_parent_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderParentIdForm'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/folders/{id}/update/expanded:
+    post:
+      tags:
+      - folders
+      summary: Update Folder Is Expanded By Id
+      operationId: update_folder_is_expanded_by_id_api_v1_folders__id__update_expanded_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderIsExpandedForm'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    FolderForm:
+      properties:
+        name:
+          type: string
+          title: Name
+        data:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Data
+        meta:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Meta
+      additionalProperties: true
+      type: object
+      required:
+      - name
+      title: FolderForm
+    FolderIsExpandedForm:
+      properties:
+        is_expanded:
+          type: boolean
+          title: Is Expanded
+      type: object
+      required:
+      - is_expanded
+      title: FolderIsExpandedForm
+    FolderMetadataResponse:
+      properties:
+        icon:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Icon
+      type: object
+      title: FolderMetadataResponse
+    FolderModel:
+      properties:
+        id:
+          type: string
+          title: Id
+        parent_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Id
+        user_id:
+          type: string
+          title: User Id
+        name:
+          type: string
+          title: Name
+        items:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Items
+        meta:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Meta
+        data:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Data
+        is_expanded:
+          type: boolean
+          title: Is Expanded
+          default: false
+        created_at:
+          type: integer
+          title: Created At
+        updated_at:
+          type: integer
+          title: Updated At
+      type: object
+      required:
+      - id
+      - user_id
+      - name
+      - created_at
+      - updated_at
+      title: FolderModel
+    FolderNameIdResponse:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        meta:
+          anyOf:
+          - $ref: '#/components/schemas/FolderMetadataResponse'
+          - type: 'null'
+        parent_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Id
+        is_expanded:
+          type: boolean
+          title: Is Expanded
+          default: false
+        created_at:
+          type: integer
+          title: Created At
+        updated_at:
+          type: integer
+          title: Updated At
+      type: object
+      required:
+      - id
+      - name
+      - created_at
+      - updated_at
+      title: FolderNameIdResponse
+    FolderParentIdForm:
+      properties:
+        parent_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Parent Id
+      type: object
+      title: FolderParentIdForm
+    FolderUpdateForm:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        data:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Data
+        meta:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Meta
+      additionalProperties: true
+      type: object
+      title: FolderUpdateForm
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

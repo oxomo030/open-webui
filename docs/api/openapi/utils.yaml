@@ -1,0 +1,221 @@
+openapi: 3.1.0
+info:
+  title: Open WebUI - Utils API
+  description: API-Spezifikation für utils Router
+  version: 1.0.0
+paths:
+  /api/v1/utils/gravatar:
+    get:
+      tags:
+      - utils
+      summary: Get Gravatar
+      operationId: get_gravatar_api_v1_utils_gravatar_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: email
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Email
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /api/v1/utils/code/format:
+    post:
+      tags:
+      - utils
+      summary: Format Code
+      operationId: format_code_api_v1_utils_code_format_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CodeForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/utils/code/execute:
+    post:
+      tags:
+      - utils
+      summary: Execute Code
+      operationId: execute_code_api_v1_utils_code_execute_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CodeForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/utils/markdown:
+    post:
+      tags:
+      - utils
+      summary: Get Html From Markdown
+      operationId: get_html_from_markdown_api_v1_utils_markdown_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarkdownForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/utils/pdf:
+    post:
+      tags:
+      - utils
+      summary: Download Chat As Pdf
+      operationId: download_chat_as_pdf_api_v1_utils_pdf_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatTitleMessagesForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/utils/db/download:
+    get:
+      tags:
+      - utils
+      summary: Download Db
+      operationId: download_db_api_v1_utils_db_download_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    ChatTitleMessagesForm:
+      properties:
+        title:
+          type: string
+          title: Title
+        messages:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Messages
+      type: object
+      required:
+      - title
+      - messages
+      title: ChatTitleMessagesForm
+    CodeForm:
+      properties:
+        code:
+          type: string
+          title: Code
+      type: object
+      required:
+      - code
+      title: CodeForm
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    MarkdownForm:
+      properties:
+        md:
+          type: string
+          title: Md
+      type: object
+      required:
+      - md
+      title: MarkdownForm
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

@@ -1,0 +1,447 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Open WebUI - Audio API",
+    "description": "API-Spezifikation für audio Router",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/v1/audio/config": {
+      "get": {
+        "tags": [
+          "audio"
+        ],
+        "summary": "Get Audio Config",
+        "operationId": "get_audio_config_api_v1_audio_config_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/audio/config/update": {
+      "post": {
+        "tags": [
+          "audio"
+        ],
+        "summary": "Update Audio Config",
+        "operationId": "update_audio_config_api_v1_audio_config_update_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AudioConfigUpdateForm"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/audio/speech": {
+      "post": {
+        "tags": [
+          "audio"
+        ],
+        "summary": "Speech",
+        "operationId": "speech_api_v1_audio_speech_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/audio/transcriptions": {
+      "post": {
+        "tags": [
+          "audio"
+        ],
+        "summary": "Transcription",
+        "operationId": "transcription_api_v1_audio_transcriptions_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_transcription_api_v1_audio_transcriptions_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/audio/models": {
+      "get": {
+        "tags": [
+          "audio"
+        ],
+        "summary": "Get Models",
+        "operationId": "get_models_api_v1_audio_models_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/audio/voices": {
+      "get": {
+        "tags": [
+          "audio"
+        ],
+        "summary": "Get Voices",
+        "operationId": "get_voices_api_v1_audio_voices_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AudioConfigUpdateForm": {
+        "properties": {
+          "tts": {
+            "$ref": "#/components/schemas/TTSConfigForm"
+          },
+          "stt": {
+            "$ref": "#/components/schemas/STTConfigForm"
+          }
+        },
+        "type": "object",
+        "required": [
+          "tts",
+          "stt"
+        ],
+        "title": "AudioConfigUpdateForm"
+      },
+      "Body_transcription_api_v1_audio_transcriptions_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "title": "File"
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Language"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_transcription_api_v1_audio_transcriptions_post"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "STTConfigForm": {
+        "properties": {
+          "OPENAI_API_BASE_URL": {
+            "type": "string",
+            "title": "Openai Api Base Url"
+          },
+          "OPENAI_API_KEY": {
+            "type": "string",
+            "title": "Openai Api Key"
+          },
+          "ENGINE": {
+            "type": "string",
+            "title": "Engine"
+          },
+          "MODEL": {
+            "type": "string",
+            "title": "Model"
+          },
+          "SUPPORTED_CONTENT_TYPES": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Supported Content Types",
+            "default": []
+          },
+          "WHISPER_MODEL": {
+            "type": "string",
+            "title": "Whisper Model"
+          },
+          "DEEPGRAM_API_KEY": {
+            "type": "string",
+            "title": "Deepgram Api Key"
+          },
+          "AZURE_API_KEY": {
+            "type": "string",
+            "title": "Azure Api Key"
+          },
+          "AZURE_REGION": {
+            "type": "string",
+            "title": "Azure Region"
+          },
+          "AZURE_LOCALES": {
+            "type": "string",
+            "title": "Azure Locales"
+          },
+          "AZURE_BASE_URL": {
+            "type": "string",
+            "title": "Azure Base Url"
+          },
+          "AZURE_MAX_SPEAKERS": {
+            "type": "string",
+            "title": "Azure Max Speakers"
+          },
+          "MISTRAL_API_KEY": {
+            "type": "string",
+            "title": "Mistral Api Key"
+          },
+          "MISTRAL_API_BASE_URL": {
+            "type": "string",
+            "title": "Mistral Api Base Url"
+          },
+          "MISTRAL_USE_CHAT_COMPLETIONS": {
+            "type": "boolean",
+            "title": "Mistral Use Chat Completions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "OPENAI_API_BASE_URL",
+          "OPENAI_API_KEY",
+          "ENGINE",
+          "MODEL",
+          "WHISPER_MODEL",
+          "DEEPGRAM_API_KEY",
+          "AZURE_API_KEY",
+          "AZURE_REGION",
+          "AZURE_LOCALES",
+          "AZURE_BASE_URL",
+          "AZURE_MAX_SPEAKERS",
+          "MISTRAL_API_KEY",
+          "MISTRAL_API_BASE_URL",
+          "MISTRAL_USE_CHAT_COMPLETIONS"
+        ],
+        "title": "STTConfigForm"
+      },
+      "TTSConfigForm": {
+        "properties": {
+          "OPENAI_API_BASE_URL": {
+            "type": "string",
+            "title": "Openai Api Base Url"
+          },
+          "OPENAI_API_KEY": {
+            "type": "string",
+            "title": "Openai Api Key"
+          },
+          "OPENAI_PARAMS": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Openai Params"
+          },
+          "API_KEY": {
+            "type": "string",
+            "title": "Api Key"
+          },
+          "ENGINE": {
+            "type": "string",
+            "title": "Engine"
+          },
+          "MODEL": {
+            "type": "string",
+            "title": "Model"
+          },
+          "VOICE": {
+            "type": "string",
+            "title": "Voice"
+          },
+          "SPLIT_ON": {
+            "type": "string",
+            "title": "Split On"
+          },
+          "AZURE_SPEECH_REGION": {
+            "type": "string",
+            "title": "Azure Speech Region"
+          },
+          "AZURE_SPEECH_BASE_URL": {
+            "type": "string",
+            "title": "Azure Speech Base Url"
+          },
+          "AZURE_SPEECH_OUTPUT_FORMAT": {
+            "type": "string",
+            "title": "Azure Speech Output Format"
+          }
+        },
+        "type": "object",
+        "required": [
+          "OPENAI_API_BASE_URL",
+          "OPENAI_API_KEY",
+          "API_KEY",
+          "ENGINE",
+          "MODEL",
+          "VOICE",
+          "SPLIT_ON",
+          "AZURE_SPEECH_REGION",
+          "AZURE_SPEECH_BASE_URL",
+          "AZURE_SPEECH_OUTPUT_FORMAT"
+        ],
+        "title": "TTSConfigForm"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

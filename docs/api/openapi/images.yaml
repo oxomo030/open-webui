@@ -1,0 +1,389 @@
+openapi: 3.1.0
+info:
+  title: Open WebUI - Images API
+  description: API-Spezifikation für images Router
+  version: 1.0.0
+paths:
+  /api/v1/images/config:
+    get:
+      tags:
+      - images
+      summary: Get Config
+      operationId: get_config_api_v1_images_config_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImagesConfig'
+      security:
+      - HTTPBearer: []
+  /api/v1/images/config/update:
+    post:
+      tags:
+      - images
+      summary: Update Config
+      operationId: update_config_api_v1_images_config_update_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImagesConfig'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/images/config/url/verify:
+    get:
+      tags:
+      - images
+      summary: Verify Url
+      operationId: verify_url_api_v1_images_config_url_verify_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      security:
+      - HTTPBearer: []
+  /api/v1/images/models:
+    get:
+      tags:
+      - images
+      summary: Get Models
+      operationId: get_models_api_v1_images_models_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      security:
+      - HTTPBearer: []
+  /api/v1/images/generations:
+    post:
+      tags:
+      - images
+      summary: Image Generations
+      operationId: image_generations_api_v1_images_generations_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateImageForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /api/v1/images/edit:
+    post:
+      tags:
+      - images
+      summary: Image Edits
+      operationId: image_edits_api_v1_images_edit_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditImageForm'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    CreateImageForm:
+      properties:
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+        prompt:
+          type: string
+          title: Prompt
+        size:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Size
+        n:
+          type: integer
+          title: N
+          default: 1
+        negative_prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Negative Prompt
+      type: object
+      required:
+      - prompt
+      title: CreateImageForm
+    EditImageForm:
+      properties:
+        image:
+          anyOf:
+          - type: string
+          - items:
+              type: string
+            type: array
+          title: Image
+        prompt:
+          type: string
+          title: Prompt
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+        size:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Size
+        n:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: N
+        negative_prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Negative Prompt
+      type: object
+      required:
+      - image
+      - prompt
+      title: EditImageForm
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ImagesConfig:
+      properties:
+        ENABLE_IMAGE_GENERATION:
+          type: boolean
+          title: Enable Image Generation
+        ENABLE_IMAGE_PROMPT_GENERATION:
+          type: boolean
+          title: Enable Image Prompt Generation
+        IMAGE_GENERATION_ENGINE:
+          type: string
+          title: Image Generation Engine
+        IMAGE_GENERATION_MODEL:
+          type: string
+          title: Image Generation Model
+        IMAGE_SIZE:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image Size
+        IMAGE_STEPS:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Image Steps
+        IMAGES_OPENAI_API_BASE_URL:
+          type: string
+          title: Images Openai Api Base Url
+        IMAGES_OPENAI_API_KEY:
+          type: string
+          title: Images Openai Api Key
+        IMAGES_OPENAI_API_VERSION:
+          type: string
+          title: Images Openai Api Version
+        IMAGES_OPENAI_API_PARAMS:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: string
+          - type: 'null'
+          title: Images Openai Api Params
+        AUTOMATIC1111_BASE_URL:
+          type: string
+          title: Automatic1111 Base Url
+        AUTOMATIC1111_API_AUTH:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: string
+          - type: 'null'
+          title: Automatic1111 Api Auth
+        AUTOMATIC1111_PARAMS:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: string
+          - type: 'null'
+          title: Automatic1111 Params
+        COMFYUI_BASE_URL:
+          type: string
+          title: Comfyui Base Url
+        COMFYUI_API_KEY:
+          type: string
+          title: Comfyui Api Key
+        COMFYUI_WORKFLOW:
+          type: string
+          title: Comfyui Workflow
+        COMFYUI_WORKFLOW_NODES:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Comfyui Workflow Nodes
+        IMAGES_GEMINI_API_BASE_URL:
+          type: string
+          title: Images Gemini Api Base Url
+        IMAGES_GEMINI_API_KEY:
+          type: string
+          title: Images Gemini Api Key
+        IMAGES_GEMINI_ENDPOINT_METHOD:
+          type: string
+          title: Images Gemini Endpoint Method
+        ENABLE_IMAGE_EDIT:
+          type: boolean
+          title: Enable Image Edit
+        IMAGE_EDIT_ENGINE:
+          type: string
+          title: Image Edit Engine
+        IMAGE_EDIT_MODEL:
+          type: string
+          title: Image Edit Model
+        IMAGE_EDIT_SIZE:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Image Edit Size
+        IMAGES_EDIT_OPENAI_API_BASE_URL:
+          type: string
+          title: Images Edit Openai Api Base Url
+        IMAGES_EDIT_OPENAI_API_KEY:
+          type: string
+          title: Images Edit Openai Api Key
+        IMAGES_EDIT_OPENAI_API_VERSION:
+          type: string
+          title: Images Edit Openai Api Version
+        IMAGES_EDIT_GEMINI_API_BASE_URL:
+          type: string
+          title: Images Edit Gemini Api Base Url
+        IMAGES_EDIT_GEMINI_API_KEY:
+          type: string
+          title: Images Edit Gemini Api Key
+        IMAGES_EDIT_COMFYUI_BASE_URL:
+          type: string
+          title: Images Edit Comfyui Base Url
+        IMAGES_EDIT_COMFYUI_API_KEY:
+          type: string
+          title: Images Edit Comfyui Api Key
+        IMAGES_EDIT_COMFYUI_WORKFLOW:
+          type: string
+          title: Images Edit Comfyui Workflow
+        IMAGES_EDIT_COMFYUI_WORKFLOW_NODES:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Images Edit Comfyui Workflow Nodes
+      type: object
+      required:
+      - ENABLE_IMAGE_GENERATION
+      - ENABLE_IMAGE_PROMPT_GENERATION
+      - IMAGE_GENERATION_ENGINE
+      - IMAGE_GENERATION_MODEL
+      - IMAGE_SIZE
+      - IMAGE_STEPS
+      - IMAGES_OPENAI_API_BASE_URL
+      - IMAGES_OPENAI_API_KEY
+      - IMAGES_OPENAI_API_VERSION
+      - IMAGES_OPENAI_API_PARAMS
+      - AUTOMATIC1111_BASE_URL
+      - AUTOMATIC1111_API_AUTH
+      - AUTOMATIC1111_PARAMS
+      - COMFYUI_BASE_URL
+      - COMFYUI_API_KEY
+      - COMFYUI_WORKFLOW
+      - COMFYUI_WORKFLOW_NODES
+      - IMAGES_GEMINI_API_BASE_URL
+      - IMAGES_GEMINI_API_KEY
+      - IMAGES_GEMINI_ENDPOINT_METHOD
+      - ENABLE_IMAGE_EDIT
+      - IMAGE_EDIT_ENGINE
+      - IMAGE_EDIT_MODEL
+      - IMAGE_EDIT_SIZE
+      - IMAGES_EDIT_OPENAI_API_BASE_URL
+      - IMAGES_EDIT_OPENAI_API_KEY
+      - IMAGES_EDIT_OPENAI_API_VERSION
+      - IMAGES_EDIT_GEMINI_API_BASE_URL
+      - IMAGES_EDIT_GEMINI_API_KEY
+      - IMAGES_EDIT_COMFYUI_BASE_URL
+      - IMAGES_EDIT_COMFYUI_API_KEY
+      - IMAGES_EDIT_COMFYUI_WORKFLOW
+      - IMAGES_EDIT_COMFYUI_WORKFLOW_NODES
+      title: ImagesConfig
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
