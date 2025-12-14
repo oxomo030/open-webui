@@ -856,6 +856,7 @@ except Exception as e:
 ```python
 # test_comfyui.py
 import pytest
+from unittest.mock import patch
 from open_webui.utils.images.comfyui import (
     comfyui_create_image,
     ComfyUICreateImageForm,
@@ -866,8 +867,8 @@ from open_webui.utils.images.comfyui import (
 async def test_workflow_mapping():
     workflow_json = '{"3": {"inputs": {"seed": 0}}, "6": {"inputs": {"text": ""}}}'
     nodes = [
-        {"type": "prompt", "key": "text", "node_ids": ["6"]},
-        {"type": "seed", "key": "seed", "node_ids": ["3"]}
+        {"type": "prompt", "key": "text", "node_ids": "6"},
+        {"type": "seed", "key": "seed", "node_ids": "3"}
     ]
     
     form = ComfyUICreateImageForm(
@@ -1042,7 +1043,8 @@ async def test_workflow_mapping():
 
 ### References
 
-- ComfyUI API Documentation: https://github.com/comfyanonymous/ComfyUI/wiki/API
+- ComfyUI GitHub Repository: https://github.com/comfyanonymous/ComfyUI
+- ComfyUI API Examples: https://github.com/comfyanonymous/ComfyUI/tree/master/script_examples
 - Open WebUI Documentation: https://docs.openwebui.com
 - WebSocket Protocol: https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
 
